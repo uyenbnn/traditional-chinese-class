@@ -1,0 +1,114 @@
+.app-shell {
+	min-height: 100dvh;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	position: relative;
+	overflow: hidden;
+}
+
+.app-shell::before {
+	content: "";
+	position: absolute;
+	inset: 0 auto auto 0;
+	width: 32rem;
+	height: 32rem;
+	background: radial-gradient(circle, rgba(217, 135, 99, 0.18), transparent 68%);
+	pointer-events: none;
+}
+
+.topbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem 1.3rem;
+	margin: 1rem auto 0;
+	width: min(calc(100% - 2rem), 92rem);
+	border: 1px solid rgba(220, 200, 167, 0.8);
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--surface-elevated) 88%, #fff);
+	box-shadow: var(--shadow-crisp);
+	backdrop-filter: blur(8px);
+	position: sticky;
+	top: 1rem;
+	z-index: 10;
+}
+
+.brand-block {
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
+}
+
+.seal {
+	margin: 0;
+	font-size: 1.2rem;
+	font-weight: 700;
+	border: 1px solid color-mix(in srgb, var(--accent) 65%, #fff);
+	border-radius: 999px;
+	padding: 0.35rem 0.7rem;
+	color: #fff;
+	background: linear-gradient(135deg, var(--accent-deep), var(--accent-strong));
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.brand-title {
+	margin: 0;
+	font-size: 1.15rem;
+	font-weight: 800;
+}
+
+.brand-subtitle {
+	margin: 0.1rem 0 0;
+	color: var(--ink-muted);
+	font-size: 0.88rem;
+}
+
+.main-nav {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.main-nav a,
+.main-nav button {
+	border: 1px solid rgba(220, 200, 167, 0.95);
+	border-radius: 999px;
+	text-decoration: none;
+	color: var(--ink-base);
+	background: rgba(255, 255, 255, 0.78);
+	padding: 0.45rem 0.95rem;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.main-nav a:hover,
+.main-nav button:hover {
+	border-color: var(--accent-strong);
+	background: #fff7f1;
+}
+
+.main-nav a.active-link {
+	background: linear-gradient(135deg, var(--accent-soft), #f4ead9);
+	border-color: var(--accent);
+	color: var(--accent-deep);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.content-area {
+	padding: 1.5rem 1rem 2rem;
+	width: min(100%, 92rem);
+	margin: 0 auto;
+	position: relative;
+	z-index: 1;
+}
+
+@media (max-width: 48rem) {
+	.topbar {
+		flex-direction: column;
+		align-items: flex-start;
+		border-radius: 1.5rem;
+	}
+}

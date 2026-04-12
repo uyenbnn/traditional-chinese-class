@@ -1,0 +1,13 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "lessons": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email != null && auth.token.email === 'nuyenbui2004763@gmail.com'",
+      "$lessonId": {
+        ".validate": "!newData.exists() || (newData.hasChildren(['id', 'title', 'summary', 'vocabulary', 'grammar', 'dialogue', 'tests', 'isPublished', 'createdAt', 'updatedAt']) && newData.child('id').isString() && newData.child('title').isString() && newData.child('summary').isString() && newData.child('dialogue').isString() && newData.child('isPublished').isBoolean() && newData.child('createdAt').isString() && newData.child('updatedAt').isString())"
+      }
+    }
+  }
+}

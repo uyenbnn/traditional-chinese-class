@@ -1,3 +1,29 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { adminGuard } from './guards/admin.guard';
+import { authGuard } from './guards/auth.guard';
+
+export const routes: Routes = [
+	{
+		path: '',
+		pathMatch: 'full',
+		redirectTo: 'learn'
+	},
+	{
+		path: 'learn',
+		loadChildren: () => import('./features/learner/learner.routes').then((m) => m.learnerRoutes)
+	},
+	{
+		path: 'auth',
+		loadChildren: () => import('./features/auth/auth.routes').then((m) => m.authRoutes)
+	},
+	{
+		path: 'admin',
+		canActivate: [authGuard, adminGuard],
+		loadChildren: () => import('./features/admin/admin.routes').then((m) => m.adminRoutes)
+	},
+	{
+		path: '**',
+		redirectTo: 'learn'
+	}
+];
