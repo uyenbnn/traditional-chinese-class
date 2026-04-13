@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - run: npm config set registry https://registry.npmjs.org
       - run: npx --yes npm@11.12.1 ci && npx --yes npm@11.12.1 run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
