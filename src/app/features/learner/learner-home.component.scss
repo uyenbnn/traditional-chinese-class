@@ -270,6 +270,31 @@ th {
   color: var(--ink-base);
 }
 
+/* ── Skeleton loader ──────────────────────────────────────── */
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.skeleton-list {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.skeleton-item {
+  height: 2.6rem;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--bg-warm-deep) 25%, rgba(220, 200, 167, 0.5) 50%, var(--bg-warm-deep) 75%);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
 .vocab-modal-footer {
   border-top: 1px solid rgba(220, 200, 167, 0.88);
   padding: 0.85rem 1rem;

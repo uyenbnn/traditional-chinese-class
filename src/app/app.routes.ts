@@ -11,14 +11,17 @@ export const routes: Routes = [
 	},
 	{
 		path: 'learn',
+		data: { animation: 'learn' },
 		loadChildren: () => import('./features/learner/learner.routes').then((m) => m.learnerRoutes)
 	},
 	{
 		path: 'auth',
+		data: { animation: 'auth' },
 		loadChildren: () => import('./features/auth/auth.routes').then((m) => m.authRoutes)
 	},
 	{
 		path: 'admin',
+		data: { animation: 'admin' },
 		canActivate: [authGuard, adminGuard],
 		loadChildren: () => import('./features/admin/admin.routes').then((m) => m.adminRoutes)
 	},

@@ -3,10 +3,16 @@
     <h1 id="learner-title">Traditional Chinese Lessons</h1>
     <p class="subtitle">Choose a lesson and begin your study.</p>
 
-    @if (publishedLessons().length === 0) {
-      <p class="empty">No published lessons yet.</p>
+    @if (lessonsLoading()) {
+      <div class="skeleton-list" [@fadeAnimation]>
+        @for (_ of [1, 2, 3]; track $index) {
+          <div class="skeleton-item"></div>
+        }
+      </div>
+    } @else if (publishedLessons().length === 0) {
+      <p class="empty" [@fadeAnimation]>No published lessons yet.</p>
     } @else {
-      <ul>
+      <ul [@fadeAnimation]>
         @for (lesson of publishedLessons(); track lesson.id) {
           <li>
             <button
@@ -25,12 +31,13 @@
 
   <main class="panel detail-panel">
     @if (selectedLesson(); as lesson) {
-      <header>
-        <h2>{{ lesson.title }}</h2>
-        <p>{{ lesson.summary || 'No summary for this lesson.' }}</p>
-      </header>
+      <div class="lesson-detail-wrapper" [@lessonTransition]="selectedLessonId()">
+        <header>
+          <h2>{{ lesson.title }}</h2>
+          <p>{{ lesson.summary || 'No summary for this lesson.' }}</p>
+        </header>
 
-      <nav class="tab-nav" role="tablist" aria-label="Lesson sections">
+        <nav class="tab-nav" role="tablist" aria-label="Lesson sections">
         <button
           type="button"
           class="tab-button"
@@ -169,12 +176,14 @@
           }
         }
       </section>
+      </div>
 
       @if (activeVocabulary(); as vocabulary) {
         <div
           class="vocab-modal-backdrop"
           role="presentation"
           tabindex="-1"
+          [@backdropAnimation]
           (click)="closeVocabularyDetails()"
           (keydown.escape)="closeVocabularyDetails()"
         >
@@ -183,6 +192,7 @@
             role="dialog"
             aria-modal="true"
             aria-labelledby="vocabulary-detail-title"
+            [@modalAnimation]
             (click)="$event.stopPropagation()"
           >
             <div class="vocab-modal-body">

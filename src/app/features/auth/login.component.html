@@ -15,9 +15,16 @@
     />
 
     @if (authService.errorMessage()) {
-      <p class="error" role="alert">{{ authService.errorMessage() }}</p>
+      <p class="error" role="alert" [@errorSlide]>{{ authService.errorMessage() }}</p>
     }
 
-    <button type="submit" [disabled]="authService.isLoading()">Sign In</button>
+    <button type="submit" [disabled]="authService.isLoading()" [class.is-loading]="authService.isLoading()">
+      @if (authService.isLoading()) {
+        <span class="btn-spinner" aria-hidden="true"></span>
+        <span class="sr-only">Signing in…</span>
+      } @else {
+        Sign In
+      }
+    </button>
   </form>
 </section>

@@ -23,7 +23,7 @@
     </nav>
   </header>
 
-  <main class="content-area">
-    <router-outlet></router-outlet>
+  <main class="content-area" [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
   </main>
 </div>

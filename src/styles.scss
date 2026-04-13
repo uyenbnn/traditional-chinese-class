@@ -89,3 +89,32 @@ a:active {
 ::selection {
 	background: rgba(171, 76, 45, 0.2);
 }
+
+/* ── Loading spinner ──────────────────────────────────────── */
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.btn-spinner {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	border: 2px solid currentColor;
+	border-top-color: transparent;
+	border-radius: 50%;
+	animation: spin 500ms linear infinite;
+	vertical-align: middle;
+}
+
+/* ── Accessibility: respect motion preference ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	::before,
+	::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { errorSlide } from '../../animations/transitions';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth.service';
 
@@ -10,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  animations: [errorSlide],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {

@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 
+import { backdropAnimation, fadeAnimation, lessonTransition, modalAnimation } from '../../animations/transitions';
 import { Lesson, VocabularyItem } from '../../models/lesson.model';
 import { LessonService } from '../../services/lesson.service';
 
@@ -10,14 +12,18 @@ type LessonTab = 'vocabulary' | 'grammar' | 'dialogue' | 'tests';
   selector: 'app-learner-home',
   templateUrl: './learner-home.component.html',
   styleUrl: './learner-home.component.scss',
+  animations: [backdropAnimation, modalAnimation, fadeAnimation, lessonTransition],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LearnerHomeComponent {
   private readonly lessonService = inject(LessonService);
 
-  private readonly lessons = toSignal(this.lessonService.listLessons(), {
-    initialValue: [] as Lesson[]
-  });
+  readonly lessonsLoading = signal(true);
+
+  private readonly lessons = toSignal(
+    this.lessonService.listLessons().pipe(tap(() => this.lessonsLoading.set(false))),
+    { initialValue: [] as Lesson[] },
+  );
 
   readonly selectedLessonId = signal<string | null>(null);
   readonly selectedTab = signal<LessonTab>('vocabulary');
