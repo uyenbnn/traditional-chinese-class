@@ -26,4 +26,26 @@
   <main class="content-area" [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>
   </main>
+
+  <footer class="app-footer" aria-label="Site footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <p class="footer-mark">文學習</p>
+        <p class="footer-title">Traditional Chinese Study</p>
+        <p class="footer-note">Practical study tracks for learners and class admins.</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a class="interactive-soft-hover" routerLink="/learn">Learning Area</a>
+        <a class="interactive-soft-hover" routerLink="/admin">Admin Dashboard</a>
+        @if (!authService.isAuthenticated()) {
+          <a class="interactive-soft-hover" routerLink="/auth/login">Sign In</a>
+        } @else {
+          <button class="interactive-soft-hover" type="button" (click)="logout()">Sign Out</button>
+        }
+      </nav>
+
+      <p class="footer-legal">&copy; {{ currentYear }} Traditional Chinese Study. Built for modern Mandarin classrooms.</p>
+    </div>
+  </footer>
 </div>

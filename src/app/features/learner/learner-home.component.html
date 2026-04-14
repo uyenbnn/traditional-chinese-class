@@ -1,6 +1,6 @@
 <section class="learner-layout" aria-labelledby="learner-title">
-  <aside class="panel lesson-list-panel">
-	<p class="eyebrow">Learner space</p>
+  <aside class="panel ui-panel lesson-list-panel ui-scrollbar-thin">
+	<p class="eyebrow ui-eyebrow">Learner space</p>
     <h1 id="learner-title">Traditional Chinese Lessons</h1>
 	<p class="subtitle">Choose a lesson and move through vocabulary, grammar, dialogue, and a short review.</p>
 
@@ -32,11 +32,11 @@
     }
   </aside>
 
-  <main class="panel detail-panel">
+  <main class="panel ui-panel detail-panel ui-scrollbar-thin">
     @if (selectedLesson(); as lesson) {
       <div class="lesson-detail-wrapper" [@lessonTransition]="selectedLessonId()">
-		<header class="lesson-hero">
-		  <p class="eyebrow">Current lesson</p>
+    <header class="lesson-hero">
+      <p class="eyebrow ui-eyebrow">Current lesson</p>
           <h2>{{ lesson.title }}</h2>
 		  <p class="lesson-summary">{{ lesson.summary || 'No summary for this lesson.' }}</p>
         </header>
@@ -91,8 +91,8 @@
             @if (lesson.vocabulary.length === 0) {
               <p class="empty-message">No vocabulary items yet.</p>
             } @else {
-              <div class="table-wrap">
-                <table>
+              <div class="table-wrap ui-table-scroll">
+                <table class="ui-table-base ui-table-readable">
                   <thead>
                     <tr>
                       <th>Word</th>
@@ -131,7 +131,7 @@
               <p class="empty-message">No grammar points yet.</p>
             } @else {
               @for (item of lesson.grammar; track item.grammar) {
-                <article class="card-block">
+                <article class="card-block ui-card ui-card-block">
                   <strong>{{ item.grammar }}</strong>
                   <p>{{ item.explanation }}</p>
                   <p class="example">{{ item.exampleSentence }}</p>
@@ -142,7 +142,7 @@
 
           @case ('dialogue') {
             <h3>Dialogue</h3>
-            <article class="card-block">
+            <article class="card-block ui-card ui-card-block">
               <p>{{ lesson.dialogue || 'No dialogue yet.' }}</p>
             </article>
           }
@@ -153,13 +153,13 @@
               <p class="empty-message">No test questions yet.</p>
             } @else {
               @for (question of lesson.tests; track question.question; let questionIndex = $index) {
-                <article class="card-block">
+                <article class="card-block ui-card ui-card-block">
                   <p><strong>{{ questionIndex + 1 }}.</strong> {{ question.question }}</p>
                   <div class="options">
                     @for (option of question.options; track option; let optionIndex = $index) {
                       <button
                         type="button"
-                        class="option-button interactive-soft-hover interactive-active-contrast"
+                        class="option-button ui-option-btn interactive-soft-hover interactive-active-contrast"
                         [class.selected]="selectedAnswers()[questionIndex] === optionIndex"
                         (click)="selectAnswer(questionIndex, optionIndex)"
                       >
@@ -171,13 +171,13 @@
               }
 
               <div class="quiz-footer">
-        <div class="score-card">
+        <div class="score-card ui-card ui-card-soft">
           <span class="score-label">Current score</span>
           <p>
           <strong>{{ score() }}</strong> / {{ lesson.tests.length }}
           </p>
         </div>
-                <button type="button" (click)="resetQuiz()" class="reset-button interactive-soft-hover">Reset Answers</button>
+                <button type="button" (click)="resetQuiz()" class="reset-button ui-option-btn interactive-soft-hover">Reset Answers</button>
               </div>
             }
           }
@@ -187,7 +187,7 @@
 
       @if (activeVocabulary(); as vocabulary) {
         <div
-          class="vocab-modal-backdrop"
+          class="vocab-modal-backdrop ui-modal-backdrop"
           role="presentation"
           tabindex="-1"
           [@backdropAnimation]
@@ -195,45 +195,45 @@
           (keydown.escape)="closeVocabularyDetails()"
         >
           <section
-            class="vocab-modal"
+            class="vocab-modal ui-modal-shell"
             role="dialog"
             aria-modal="true"
             aria-labelledby="vocabulary-detail-title"
             [@modalAnimation]
             (click)="$event.stopPropagation()"
           >
-            <div class="vocab-modal-body">
+            <div class="vocab-modal-body ui-modal-body-split">
               <div class="vocab-word-panel">
                 <h3 id="vocabulary-detail-title" class="sr-only">Vocabulary detail</h3>
                 <p class="vocab-word">{{ vocabulary.word || '—' }}</p>
               </div>
 
-              <div class="vocab-info-panel">
-				<p class="eyebrow">Vocabulary card</p>
-                <p class="vocab-meta-label">Pinyin</p>
-                <p class="vocab-meta-value">{{ vocabulary.pinyin || 'No pinyin yet.' }}</p>
+              <div class="vocab-info-panel ui-modal-panel">
+        <p class="eyebrow ui-eyebrow">Vocabulary card</p>
+                <p class="vocab-meta-label ui-meta-label">Pinyin</p>
+                <p class="vocab-meta-value ui-meta-value">{{ vocabulary.pinyin || 'No pinyin yet.' }}</p>
 
-                <p class="vocab-meta-label">Meaning</p>
-                <p class="vocab-meta-value">{{ vocabulary.meaning || 'No meaning yet.' }}</p>
+                <p class="vocab-meta-label ui-meta-label">Meaning</p>
+                <p class="vocab-meta-value ui-meta-value">{{ vocabulary.meaning || 'No meaning yet.' }}</p>
 
-                <p class="vocab-meta-label">Example</p>
-                <p class="vocab-meta-value">{{ vocabulary.exampleSentence || 'No example yet.' }}</p>
+                <p class="vocab-meta-label ui-meta-label">Example</p>
+                <p class="vocab-meta-value ui-meta-value">{{ vocabulary.exampleSentence || 'No example yet.' }}</p>
 
-                <p class="vocab-meta-label">Note</p>
-                <p class="vocab-meta-value">{{ vocabulary.note || 'No note yet.' }}</p>
+                <p class="vocab-meta-label ui-meta-label">Note</p>
+                <p class="vocab-meta-value ui-meta-value">{{ vocabulary.note || 'No note yet.' }}</p>
               </div>
             </div>
 
-            <footer class="vocab-modal-footer">
-              <span class="vocab-count">{{ vocabularyPositionLabel() }}</span>
-              <div class="vocab-actions">
-                <button type="button" class="reset-button interactive-soft-hover" (click)="showPreviousVocabulary()" [disabled]="!hasPreviousVocabulary()">
+            <footer class="vocab-modal-footer ui-footer-strip">
+              <span class="vocab-count ui-muted-counter">{{ vocabularyPositionLabel() }}</span>
+              <div class="vocab-actions ui-actions-wrap">
+                <button type="button" class="reset-button ui-option-btn interactive-soft-hover" (click)="showPreviousVocabulary()" [disabled]="!hasPreviousVocabulary()">
                   Previous
                 </button>
-                <button type="button" class="reset-button interactive-soft-hover" (click)="showNextVocabulary()" [disabled]="!hasNextVocabulary()">
+                <button type="button" class="reset-button ui-option-btn interactive-soft-hover" (click)="showNextVocabulary()" [disabled]="!hasNextVocabulary()">
                   Next
                 </button>
-                <button type="button" class="tab-button interactive-soft-hover" (click)="closeVocabularyDetails()">Close</button>
+                <button type="button" class="ui-btn tab-button interactive-soft-hover" (click)="closeVocabularyDetails()">Close</button>
               </div>
             </footer>
           </section>

@@ -3,9 +3,9 @@
     <div class="toast" role="status" aria-live="polite">{{ toastMessage() }}</div>
   }
 
-  <div class="panel left-panel">
+  <div class="panel ui-panel left-panel ui-scrollbar-thin">
   <header class="workspace-header">
-    <p class="eyebrow">Admin space</p>
+    <p class="eyebrow ui-eyebrow">Admin space</p>
     <h1 id="admin-workspace-title">Admin Workspace</h1>
     <p class="hint">Create, update, and publish lessons for learners with a calmer, cleaner editing flow.</p>
   </header>
@@ -14,24 +14,24 @@
       <p class="status" role="status">{{ statusMessage() }}</p>
     }
 
-    <form [formGroup]="lessonForm" (ngSubmit)="saveLesson()" novalidate>
-      <label for="lesson-title">Lesson Title</label>
-      <input id="lesson-title" formControlName="title" type="text" />
+    <form class="ui-form-grid" [formGroup]="lessonForm" (ngSubmit)="saveLesson()" novalidate>
+      <label class="ui-form-label" for="lesson-title">Lesson Title</label>
+      <input class="ui-form-control" id="lesson-title" formControlName="title" type="text" />
 
-      <label for="lesson-summary">Summary</label>
-      <textarea id="lesson-summary" formControlName="summary" rows="2"></textarea>
+      <label class="ui-form-label" for="lesson-summary">Summary</label>
+      <textarea class="ui-form-control" id="lesson-summary" formControlName="summary" rows="2"></textarea>
 
-      <label for="lesson-dialogue">Dialogue</label>
-      <textarea id="lesson-dialogue" formControlName="dialogue" rows="4"></textarea>
+      <label class="ui-form-label" for="lesson-dialogue">Dialogue</label>
+      <textarea class="ui-form-control" id="lesson-dialogue" formControlName="dialogue" rows="4"></textarea>
 
       <section class="editor-section" aria-labelledby="vocabulary-table-title">
         <div class="section-header">
           <h3 id="vocabulary-table-title">Vocabulary</h3>
-          <button type="button" class="secondary interactive-soft-hover" (click)="addVocabularyRow()">Add Row</button>
+          <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="addVocabularyRow()">Add Row</button>
         </div>
 
-        <div class="table-wrap" formArrayName="vocabulary">
-          <table class="data-table">
+        <div class="table-wrap ui-table-scroll ui-table-chrome" formArrayName="vocabulary">
+          <table class="data-table ui-table-base">
             <thead>
               <tr>
                 <th scope="col">Word</th>
@@ -45,15 +45,15 @@
             <tbody>
               @for (row of vocabularyRows.controls; track $index; let i = $index) {
                 <tr [formGroupName]="i">
-                  <td><input [id]="'vocabulary-word-' + i" formControlName="word" type="text" /></td>
-                  <td><input [id]="'vocabulary-pinyin-' + i" formControlName="pinyin" type="text" /></td>
-                  <td><input [id]="'vocabulary-meaning-' + i" formControlName="meaning" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'vocabulary-word-' + i" formControlName="word" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'vocabulary-pinyin-' + i" formControlName="pinyin" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'vocabulary-meaning-' + i" formControlName="meaning" type="text" /></td>
                   <td>
-                    <input [id]="'vocabulary-example-' + i" formControlName="exampleSentence" type="text" />
+                    <input class="ui-form-control" [id]="'vocabulary-example-' + i" formControlName="exampleSentence" type="text" />
                   </td>
-                  <td><input [id]="'vocabulary-note-' + i" formControlName="note" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'vocabulary-note-' + i" formControlName="note" type="text" /></td>
                   <td>
-                    <button type="button" class="danger" (click)="removeVocabularyRow(i)">Delete</button>
+                    <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeVocabularyRow(i)">Delete</button>
                   </td>
                 </tr>
               }
@@ -65,11 +65,11 @@
       <section class="editor-section" aria-labelledby="grammar-table-title">
         <div class="section-header">
           <h3 id="grammar-table-title">Grammar</h3>
-          <button type="button" class="secondary interactive-soft-hover" (click)="addGrammarRow()">Add Row</button>
+          <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="addGrammarRow()">Add Row</button>
         </div>
 
-        <div class="table-wrap" formArrayName="grammar">
-          <table class="data-table">
+        <div class="table-wrap ui-table-scroll ui-table-chrome" formArrayName="grammar">
+          <table class="data-table ui-table-base">
             <thead>
               <tr>
                 <th scope="col">Grammar Point</th>
@@ -81,11 +81,11 @@
             <tbody>
               @for (row of grammarRows.controls; track $index; let i = $index) {
                 <tr [formGroupName]="i">
-                  <td><input [id]="'grammar-point-' + i" formControlName="grammar" type="text" /></td>
-                  <td><input [id]="'grammar-explanation-' + i" formControlName="explanation" type="text" /></td>
-                  <td><input [id]="'grammar-example-' + i" formControlName="exampleSentence" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'grammar-point-' + i" formControlName="grammar" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'grammar-explanation-' + i" formControlName="explanation" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'grammar-example-' + i" formControlName="exampleSentence" type="text" /></td>
                   <td>
-                    <button type="button" class="danger" (click)="removeGrammarRow(i)">Delete</button>
+                    <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeGrammarRow(i)">Delete</button>
                   </td>
                 </tr>
               }
@@ -97,11 +97,11 @@
       <section class="editor-section" aria-labelledby="tests-table-title">
         <div class="section-header">
           <h3 id="tests-table-title">Tests</h3>
-          <button type="button" class="secondary interactive-soft-hover" (click)="addTestRow()">Add Row</button>
+          <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="addTestRow()">Add Row</button>
         </div>
 
-        <div class="table-wrap" formArrayName="tests">
-          <table class="data-table">
+        <div class="table-wrap ui-table-scroll ui-table-chrome" formArrayName="tests">
+          <table class="data-table ui-table-base">
             <thead>
               <tr>
                 <th scope="col">Question</th>
@@ -116,13 +116,13 @@
             <tbody>
               @for (row of testRows.controls; track $index; let i = $index) {
                 <tr [formGroupName]="i">
-                  <td><input [id]="'test-question-' + i" formControlName="question" type="text" /></td>
-                  <td><input [id]="'test-option-a-' + i" formControlName="optionA" type="text" /></td>
-                  <td><input [id]="'test-option-b-' + i" formControlName="optionB" type="text" /></td>
-                  <td><input [id]="'test-option-c-' + i" formControlName="optionC" type="text" /></td>
-                  <td><input [id]="'test-option-d-' + i" formControlName="optionD" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'test-question-' + i" formControlName="question" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'test-option-a-' + i" formControlName="optionA" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'test-option-b-' + i" formControlName="optionB" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'test-option-c-' + i" formControlName="optionC" type="text" /></td>
+                  <td><input class="ui-form-control" [id]="'test-option-d-' + i" formControlName="optionD" type="text" /></td>
                   <td>
-                    <select [id]="'test-correct-answer-' + i" formControlName="correctAnswerIndex">
+                    <select class="ui-form-control" [id]="'test-correct-answer-' + i" formControlName="correctAnswerIndex">
                       <option [ngValue]="0">A</option>
                       <option [ngValue]="1">B</option>
                       <option [ngValue]="2">C</option>
@@ -130,7 +130,7 @@
                     </select>
                   </td>
                   <td>
-                    <button type="button" class="danger" (click)="removeTestRow(i)">Delete</button>
+                    <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeTestRow(i)">Delete</button>
                   </td>
                 </tr>
               }
@@ -145,14 +145,14 @@
       </label>
 
       <div class="actions">
-        <button type="submit">{{ selectedLessonId() ? 'Update Lesson' : 'Create Lesson' }}</button>
-        <button type="button" class="secondary interactive-soft-hover" (click)="clearForm()">Clear</button>
+        <button type="submit" class="ui-btn ui-btn-primary">{{ selectedLessonId() ? 'Update Lesson' : 'Create Lesson' }}</button>
+        <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="clearForm()">Clear</button>
       </div>
     </form>
   </div>
 
-  <div class="panel right-panel">
-	<p class="eyebrow">Library</p>
+  <div class="panel ui-panel right-panel ui-scrollbar-thin">
+	<p class="eyebrow ui-eyebrow">Library</p>
     <h2>Lessons</h2>
 
     @if (lessons$ | async; as lessons) {
@@ -161,7 +161,7 @@
       } @else {
         <ul class="lesson-list">
           @for (lesson of lessons; track lesson.id) {
-            <li class="interactive-surface-soft">
+            <li class="ui-card interactive-surface-soft">
               <div>
                 <h3>{{ lesson.title }}</h3>
                 <p>{{ lesson.summary || 'No summary yet.' }}</p>
@@ -172,8 +172,8 @@
               </div>
 
               <div class="row-actions">
-                <button type="button" class="secondary interactive-soft-hover" (click)="editLesson(lesson)">Edit</button>
-                <button type="button" class="danger" (click)="deleteLesson(lesson.id)">Delete</button>
+                <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="editLesson(lesson)">Edit</button>
+                <button type="button" class="ui-btn ui-btn-danger danger" (click)="deleteLesson(lesson.id)">Delete</button>
               </div>
             </li>
           }

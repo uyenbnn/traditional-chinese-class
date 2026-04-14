@@ -1,17 +1,18 @@
 <section class="auth-card" aria-labelledby="admin-login-title">
-  <p class="eyebrow">Admin workspace</p>
+  <p class="eyebrow ui-eyebrow">Admin workspace</p>
   <h1 id="admin-login-title">Admin Login</h1>
   <p class="subtitle">Sign in to manage lessons, update content, and keep the classroom materials current.</p>
 
-  <form [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
-  <div class="field">
-    <label for="admin-email">Admin Email</label>
-    <input id="admin-email" type="email" formControlName="email" autocomplete="username" />
+  <form class="ui-form-grid" [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
+  <div class="field ui-form-field">
+    <label class="ui-form-label" for="admin-email">Admin Email</label>
+    <input class="ui-form-control" id="admin-email" type="email" formControlName="email" autocomplete="username" />
   </div>
 
-  <div class="field">
-    <label for="admin-password">Password</label>
+  <div class="field ui-form-field">
+    <label class="ui-form-label" for="admin-password">Password</label>
     <input
+      class="ui-form-control"
       id="admin-password"
       type="password"
       formControlName="password"
@@ -23,7 +24,7 @@
     <p class="error" role="alert" [@errorSlide]>{{ authService.errorMessage() }}</p>
     }
 
-  <button type="submit" [disabled]="authService.isLoading()" [class.is-loading]="authService.isLoading()">
+  <button class="ui-btn ui-btn-primary" type="submit" [disabled]="authService.isLoading()" [class.is-loading]="authService.isLoading()">
       @if (authService.isLoading()) {
         <span class="btn-spinner" aria-hidden="true"></span>
         <span class="sr-only">Signing in…</span>

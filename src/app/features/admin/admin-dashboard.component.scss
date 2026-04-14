@@ -4,6 +4,10 @@
   align-items: start;
 }
 
+.admin-layout > * {
+  min-width: 0;
+}
+
 .toast {
   position: fixed;
   right: 1rem;
@@ -36,17 +40,18 @@
   }
 }
 
-.panel {
-  background: linear-gradient(180deg, var(--surface-strong), rgba(233, 241, 249, 0.94));
-  border: 1px solid rgba(188, 205, 221, 0.94);
-  border-radius: var(--radius-xl);
-  padding: 1.4rem;
-  box-shadow: var(--shadow-soft);
-}
-
 .right-panel {
   position: sticky;
   top: 7rem;
+}
+
+@media (min-width: 60rem) {
+  .left-panel,
+  .right-panel {
+    height: calc(100vh - 10rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
 }
 
 h1 {
@@ -59,21 +64,6 @@ h2 {
   margin: 0 0 1rem;
   font-size: 1.35rem;
 	font-weight: 700;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 0.7rem;
-  padding: 0.38rem 0.72rem;
-  border-radius: 999px;
-  border: 1px solid rgba(188, 205, 221, 0.92);
-  background: rgba(255, 255, 255, 0.88);
-  color: var(--accent-deep);
-  font-size: var(--text-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 .workspace-header {
@@ -97,38 +87,8 @@ h2 {
   display: inline-flex;
 }
 
-form {
-  display: grid;
-  gap: 0.9rem;
-}
-
-label {
-  font-weight: 600;
-  font-size: 0.92rem;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  border: 1px solid rgba(128, 155, 184, 0.92);
-  border-radius: var(--radius-sm);
-  padding: 0.78rem 0.82rem;
-  font: inherit;
-  background: rgba(255, 255, 255, 0.9);
-	box-shadow: inset 0 1px 2px rgba(45, 64, 86, 0.05);
-}
-
 textarea {
   resize: vertical;
-}
-
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: 0;
-  border-color: var(--accent);
-  box-shadow: var(--ring);
 }
 
 .editor-section {
@@ -153,37 +113,8 @@ select:focus-visible {
   font-size: 1.02rem;
 }
 
-.table-wrap {
-  overflow-x: auto;
-  border: 1px solid rgba(188, 205, 221, 0.94);
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.78);
-}
-
 .data-table {
-  width: 100%;
   min-width: 50rem;
-  border-collapse: collapse;
-}
-
-.data-table th,
-.data-table td {
-	border-bottom: 1px solid rgba(204, 217, 231, 0.7);
-  padding: 0.55rem;
-  text-align: left;
-  vertical-align: top;
-}
-
-.data-table thead th {
-  font-size: 0.83rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  background: rgba(219, 232, 244, 0.86);
-}
-
-.data-table tbody tr:last-child td {
-  border-bottom: 0;
 }
 
 .data-table td button {
@@ -250,32 +181,6 @@ select:focus-visible {
   flex-wrap: wrap;
 }
 
-button {
-  border: 0;
-  border-radius: var(--radius-sm);
-  padding: 0.65rem 1rem;
-  background: linear-gradient(135deg, var(--accent-deep), var(--accent));
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 10px 18px rgba(36, 72, 104, 0.24);
-}
-
-button:hover {
-  box-shadow: 0 14px 24px rgba(36, 72, 104, 0.28);
-}
-
-.secondary {
-  background: linear-gradient(180deg, #f4f8fc, #dfe9f4);
-  color: var(--ink-base);
-  box-shadow: none;
-}
-
-.danger {
-  background: var(--danger);
-  box-shadow: none;
-}
-
 .lesson-list {
   list-style: none;
   margin: 0;
@@ -285,13 +190,11 @@ button:hover {
 }
 
 .lesson-list li {
-  border: 1px solid rgba(188, 205, 221, 0.94);
   border-radius: var(--radius-lg);
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   gap: 0.9rem;
-  background: rgba(255, 255, 255, 0.86);
 }
 
 h3 {
@@ -332,11 +235,25 @@ small {
 }
 
 @media (max-width: 60rem) {
+  .panel {
+    padding: 1rem;
+  }
+
   .right-panel {
     position: static;
   }
 
+  .left-panel,
+  .right-panel {
+    height: auto;
+    overflow: visible;
+  }
+
   .data-table {
     min-width: 42rem;
+  }
+
+  .lesson-list li {
+    flex-direction: column;
   }
 }

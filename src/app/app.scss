@@ -1,7 +1,7 @@
 .app-shell {
 	min-height: 100dvh;
 	display: grid;
-	grid-template-rows: auto 1fr;
+	grid-template-rows: auto 1fr auto;
 	position: relative;
 	overflow: hidden;
 }
@@ -56,6 +56,7 @@
 	font-size: 1rem;
 	font-weight: 700;
 	letter-spacing: 0.08em;
+	text-align: center;
 	border: 1px solid color-mix(in srgb, var(--accent) 28%, #fff);
 	border-radius: 999px;
 	padding: 0.45rem 0.72rem;
@@ -106,6 +107,85 @@
 	z-index: 1;
 }
 
+.app-footer {
+	padding: 0 1rem 1.2rem;
+	position: relative;
+	z-index: 1;
+}
+
+.footer-content {
+	width: min(calc(100% - 0rem), 92rem);
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+	gap: 1rem 1.4rem;
+	padding: 1rem 1.1rem;
+	border: 1px solid color-mix(in srgb, var(--line-soft) 82%, #fff);
+	border-radius: 1.2rem;
+	background:
+		linear-gradient(160deg, rgba(247, 251, 255, 0.94), rgba(234, 242, 250, 0.9)),
+		radial-gradient(circle at 12% 15%, rgba(127, 161, 193, 0.16), transparent 40%);
+	box-shadow: 0 14px 28px rgba(22, 38, 55, 0.1);
+	backdrop-filter: blur(8px);
+}
+
+.footer-brand {
+	display: grid;
+	gap: 0.28rem;
+}
+
+.footer-mark {
+	margin: 0;
+	font-size: var(--text-xs);
+	letter-spacing: 0.14em;
+	font-weight: 800;
+	color: var(--accent-deep);
+	text-transform: uppercase;
+}
+
+.footer-title {
+	margin: 0;
+	font-size: var(--text-sm);
+	font-weight: 800;
+	color: var(--ink-base);
+}
+
+.footer-note,
+.footer-legal {
+	margin: 0;
+	font-size: var(--text-xs);
+	color: var(--ink-soft);
+}
+
+.footer-links {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.footer-links a,
+.footer-links button {
+	border: 1px solid rgba(188, 205, 221, 0.98);
+	border-radius: 999px;
+	text-decoration: none;
+	color: var(--ink-base);
+	background: rgba(255, 255, 255, 0.85);
+	padding: 0.4rem 0.8rem;
+	font: inherit;
+	font-weight: 700;
+	font-size: var(--text-xs);
+	cursor: pointer;
+}
+
+.footer-legal {
+	grid-column: 1 / -1;
+	padding-top: 0.15rem;
+	border-top: 1px dashed color-mix(in srgb, var(--line-soft) 72%, #fff);
+	padding-top: 0.6rem;
+}
+
 @media (max-width: 48rem) {
 	.topbar {
 		flex-direction: column;
@@ -121,5 +201,14 @@
 	.main-nav button {
 		justify-content: center;
 		text-align: center;
+	}
+
+	.footer-content {
+		grid-template-columns: 1fr;
+		padding: 0.95rem;
+	}
+
+	.footer-links {
+		justify-content: flex-start;
 	}
 }

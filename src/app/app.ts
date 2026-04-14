@@ -14,6 +14,7 @@ import { AuthService } from './services/auth.service';
 })
 export class App {
   readonly authService = inject(AuthService);
+  readonly currentYear = new Date().getFullYear();
   private readonly router = inject(Router);
 
   prepareRoute(outlet: RouterOutlet): string {
