@@ -137,6 +137,8 @@ h2 {
 }
 
 .tab-button {
+  display: inline-flex;
+  align-items: center;
   border: 1px solid rgba(128, 155, 184, 0.9);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.88);

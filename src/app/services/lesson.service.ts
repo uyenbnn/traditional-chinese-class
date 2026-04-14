@@ -5,8 +5,7 @@ import {
   push,
   ref,
   remove,
-  set,
-  update
+  set
 } from 'firebase/database';
 import { Observable } from 'rxjs';
 
@@ -28,7 +27,7 @@ export class LessonService {
       const unsubscribe = onValue(
         this.lessonsRef,
         (snapshot) => {
-          const lessonsRecord = (snapshot.val() as Record<string, LessonPayload | Lesson> | null) ?? {};
+          const lessonsRecord = (snapshot.val() as Record<string, Omit<Lesson, 'id'>> | null) ?? {};
           const lessons = Object.entries(lessonsRecord)
             .map(([id, lesson]) => ({
               ...lesson,
@@ -63,7 +62,7 @@ export class LessonService {
           }
 
           subscriber.next({
-            ...(snapshot.val() as LessonPayload),
+              ...(snapshot.val() as Omit<Lesson, 'id'>),
             id: lessonId
           });
           subscriber.complete();
@@ -92,12 +91,22 @@ export class LessonService {
     return lessonId;
   }
 
-  async updateLesson(lessonId: string, payload: Partial<LessonPayload>): Promise<void> {
+  async updateLesson(lessonId: string, payload: LessonPayload): Promise<void> {
     const lessonRef = ref(this.firebaseService.database, `lessons/${lessonId}`);
+    const snapshot = await get(lessonRef);
 
-    await update(lessonRef, {
+    if (!snapshot.exists()) {
+      throw new Error('Lesson not found.');
+    }
+
+    const existingLesson = snapshot.val() as Omit<Lesson, 'id'>;
+    const now = new Date().toISOString();
+
+    await set(lessonRef, {
       ...payload,
-      updatedAt: new Date().toISOString()
+      id: lessonId,
+      createdAt: existingLesson.createdAt,
+      updatedAt: now
     });
   }
 

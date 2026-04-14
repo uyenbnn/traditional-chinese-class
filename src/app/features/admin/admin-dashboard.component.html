@@ -27,7 +27,12 @@
       <section class="editor-section" aria-labelledby="vocabulary-table-title">
         <div class="section-header">
           <h3 id="vocabulary-table-title">Vocabulary</h3>
-          <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="addVocabularyRow()">Add Row</button>
+          <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="addVocabularyRow()">
+            <span class="icon-with-label">
+              <app-icon name="add_circle" size="sm" [decorative]="true"></app-icon>
+              <span>Add Row</span>
+            </span>
+          </button>
         </div>
 
         <div class="table-wrap ui-table-scroll ui-table-chrome" formArrayName="vocabulary">
@@ -43,7 +48,7 @@
               </tr>
             </thead>
             <tbody>
-              @for (row of vocabularyRows.controls; track $index; let i = $index) {
+              @for (row of vocabularyRows.controls; track row; let i = $index) {
                 <tr [formGroupName]="i">
                   <td><input class="ui-form-control" [id]="'vocabulary-word-' + i" formControlName="word" type="text" /></td>
                   <td><input class="ui-form-control" [id]="'vocabulary-pinyin-' + i" formControlName="pinyin" type="text" /></td>
@@ -53,7 +58,12 @@
                   </td>
                   <td><input class="ui-form-control" [id]="'vocabulary-note-' + i" formControlName="note" type="text" /></td>
                   <td>
-                    <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeVocabularyRow(i)">Delete</button>
+                    <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeVocabularyRow(i)">
+                      <span class="icon-with-label">
+                        <app-icon name="delete" size="sm" [decorative]="true"></app-icon>
+                        <span>Delete</span>
+                      </span>
+                    </button>
                   </td>
                 </tr>
               }
@@ -65,7 +75,12 @@
       <section class="editor-section" aria-labelledby="grammar-table-title">
         <div class="section-header">
           <h3 id="grammar-table-title">Grammar</h3>
-          <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="addGrammarRow()">Add Row</button>
+          <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="addGrammarRow()">
+            <span class="icon-with-label">
+              <app-icon name="add_circle" size="sm" [decorative]="true"></app-icon>
+              <span>Add Row</span>
+            </span>
+          </button>
         </div>
 
         <div class="table-wrap ui-table-scroll ui-table-chrome" formArrayName="grammar">
@@ -79,13 +94,18 @@
               </tr>
             </thead>
             <tbody>
-              @for (row of grammarRows.controls; track $index; let i = $index) {
+              @for (row of grammarRows.controls; track row; let i = $index) {
                 <tr [formGroupName]="i">
                   <td><input class="ui-form-control" [id]="'grammar-point-' + i" formControlName="grammar" type="text" /></td>
                   <td><input class="ui-form-control" [id]="'grammar-explanation-' + i" formControlName="explanation" type="text" /></td>
                   <td><input class="ui-form-control" [id]="'grammar-example-' + i" formControlName="exampleSentence" type="text" /></td>
                   <td>
-                    <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeGrammarRow(i)">Delete</button>
+                    <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeGrammarRow(i)">
+                      <span class="icon-with-label">
+                        <app-icon name="delete" size="sm" [decorative]="true"></app-icon>
+                        <span>Delete</span>
+                      </span>
+                    </button>
                   </td>
                 </tr>
               }
@@ -97,7 +117,12 @@
       <section class="editor-section" aria-labelledby="tests-table-title">
         <div class="section-header">
           <h3 id="tests-table-title">Tests</h3>
-          <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="addTestRow()">Add Row</button>
+          <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="addTestRow()">
+            <span class="icon-with-label">
+              <app-icon name="add_circle" size="sm" [decorative]="true"></app-icon>
+              <span>Add Row</span>
+            </span>
+          </button>
         </div>
 
         <div class="table-wrap ui-table-scroll ui-table-chrome" formArrayName="tests">
@@ -114,7 +139,7 @@
               </tr>
             </thead>
             <tbody>
-              @for (row of testRows.controls; track $index; let i = $index) {
+              @for (row of testRows.controls; track row; let i = $index) {
                 <tr [formGroupName]="i">
                   <td><input class="ui-form-control" [id]="'test-question-' + i" formControlName="question" type="text" /></td>
                   <td><input class="ui-form-control" [id]="'test-option-a-' + i" formControlName="optionA" type="text" /></td>
@@ -130,7 +155,12 @@
                     </select>
                   </td>
                   <td>
-                    <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeTestRow(i)">Delete</button>
+                    <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeTestRow(i)">
+                      <span class="icon-with-label">
+                        <app-icon name="delete" size="sm" [decorative]="true"></app-icon>
+                        <span>Delete</span>
+                      </span>
+                    </button>
                   </td>
                 </tr>
               }
@@ -141,12 +171,25 @@
 
       <label class="checkbox">
         <input type="checkbox" formControlName="isPublished" />
-        Publish for learners
+        <span class="icon-with-label">
+          <app-icon name="publish" size="sm" [decorative]="true"></app-icon>
+          <span>Publish for learners</span>
+        </span>
       </label>
 
       <div class="actions">
-        <button type="submit" class="ui-btn ui-btn-primary">{{ selectedLessonId() ? 'Update Lesson' : 'Create Lesson' }}</button>
-        <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="clearForm()">Clear</button>
+        <button type="submit" class="ui-btn ui-btn-primary">
+          <span class="icon-with-label">
+            <app-icon [name]="selectedLessonId() ? 'save' : 'add_circle'" size="sm" [decorative]="true"></app-icon>
+            <span>{{ selectedLessonId() ? 'Update Lesson' : 'Create Lesson' }}</span>
+          </span>
+        </button>
+        <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="clearForm()">
+          <span class="icon-with-label">
+            <app-icon name="backspace" size="sm" [decorative]="true"></app-icon>
+            <span>Clear</span>
+          </span>
+        </button>
       </div>
     </form>
   </div>
@@ -172,8 +215,18 @@
               </div>
 
               <div class="row-actions">
-                <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="editLesson(lesson)">Edit</button>
-                <button type="button" class="ui-btn ui-btn-danger danger" (click)="deleteLesson(lesson.id)">Delete</button>
+                <button type="button" class="ui-btn ui-btn-secondary secondary interactive-soft-hover" (click)="editLesson(lesson)">
+                  <span class="icon-with-label">
+                    <!-- <app-icon name="edit_square" size="lg" [decorative]="true"></app-icon> -->
+                    <span>Edit</span>
+                  </span>
+                </button>
+                <button type="button" class="ui-btn ui-btn-danger danger" (click)="deleteLesson(lesson.id)">
+                  <span class="icon-with-label">
+                    <!-- <app-icon name="delete_forever" size="lg" [decorative]="true"></app-icon> -->
+                    <span>Delete</span>
+                  </span>
+                </button>
               </div>
             </li>
           }

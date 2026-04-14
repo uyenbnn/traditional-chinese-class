@@ -120,6 +120,52 @@ a:active {
 	box-shadow: var(--ring);
 }
 
+.material-symbols-rounded {
+	font-style: normal;
+	font-weight: 500;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	line-height: 1;
+	font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+	font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+	vertical-align: middle;
+}
+
+.icon-with-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.app-icon-symbol {
+	color: currentColor;
+}
+
+.app-icon-symbol.app-icon-filled {
+	font-variation-settings: 'FILL' 1, 'wght' 550, 'GRAD' 0, 'opsz' 24;
+}
+
+.app-icon-symbol.app-icon-tone-muted {
+	color: var(--ink-soft);
+}
+
+.app-icon-symbol.app-icon-tone-accent {
+	color: var(--accent-deep);
+}
+
+.app-icon-symbol.app-icon-tone-danger {
+	color: var(--danger);
+}
+
+.app-icon-symbol.app-icon-tone-success {
+	color: var(--success);
+}
+
 /* Shared UI templates (additive and reusable) */
 .ui-panel {
 	background: linear-gradient(180deg, var(--surface-strong), rgba(233, 241, 249, 0.94));

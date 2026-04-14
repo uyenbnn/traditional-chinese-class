@@ -10,15 +10,31 @@
 
     <nav class="main-nav" aria-label="Primary">
       <a class="interactive-soft-hover interactive-active-contrast" routerLink="/learn" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">
-        Learn
+        <span class="icon-with-label">
+          <app-icon name="school" size="sm" [decorative]="true"></app-icon>
+          <span>Learn</span>
+        </span>
       </a>
       <a class="interactive-soft-hover interactive-active-contrast" routerLink="/admin" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">
-        Admin
+        <span class="icon-with-label">
+          <app-icon name="admin_panel_settings" size="sm" [decorative]="true"></app-icon>
+          <span>Admin</span>
+        </span>
       </a>
       @if (!authService.isAuthenticated()) {
-        <a class="interactive-soft-hover interactive-active-contrast" routerLink="/auth/login" routerLinkActive="active-link">Sign In</a>
+        <a class="interactive-soft-hover interactive-active-contrast" routerLink="/auth/login" routerLinkActive="active-link">
+          <span class="icon-with-label">
+            <app-icon name="login" size="sm" [decorative]="true"></app-icon>
+            <span>Sign In</span>
+          </span>
+        </a>
       } @else {
-        <button class="interactive-soft-hover" type="button" (click)="logout()">Sign Out</button>
+        <button class="interactive-soft-hover" type="button" (click)="logout()">
+          <span class="icon-with-label">
+            <app-icon name="logout" size="sm" [decorative]="true"></app-icon>
+            <span>Sign Out</span>
+          </span>
+        </button>
       }
     </nav>
   </header>
@@ -36,12 +52,32 @@
       </div>
 
       <nav class="footer-links" aria-label="Footer navigation">
-        <a class="interactive-soft-hover" routerLink="/learn">Learning Area</a>
-        <a class="interactive-soft-hover" routerLink="/admin">Admin Dashboard</a>
+        <a class="interactive-soft-hover" routerLink="/learn">
+          <span class="icon-with-label">
+            <app-icon name="menu_book" size="sm" [decorative]="true"></app-icon>
+            <span>Learning Area</span>
+          </span>
+        </a>
+        <a class="interactive-soft-hover" routerLink="/admin">
+          <span class="icon-with-label">
+            <app-icon name="dashboard" size="sm" [decorative]="true"></app-icon>
+            <span>Admin Dashboard</span>
+          </span>
+        </a>
         @if (!authService.isAuthenticated()) {
-          <a class="interactive-soft-hover" routerLink="/auth/login">Sign In</a>
+          <a class="interactive-soft-hover" routerLink="/auth/login">
+            <span class="icon-with-label">
+              <app-icon name="key" size="sm" [decorative]="true"></app-icon>
+              <span>Sign In</span>
+            </span>
+          </a>
         } @else {
-          <button class="interactive-soft-hover" type="button" (click)="logout()">Sign Out</button>
+          <button class="interactive-soft-hover" type="button" (click)="logout()">
+            <span class="icon-with-label">
+              <app-icon name="logout" size="sm" [decorative]="true"></app-icon>
+              <span>Sign Out</span>
+            </span>
+          </button>
         }
       </nav>
 

@@ -1,5 +1,8 @@
 <section class="auth-card" aria-labelledby="admin-login-title">
-  <p class="eyebrow ui-eyebrow">Admin workspace</p>
+  <p class="eyebrow ui-eyebrow icon-with-label">
+    <span class="material-symbols-rounded" aria-hidden="true">lock</span>
+    <span>Admin workspace</span>
+  </p>
   <h1 id="admin-login-title">Admin Login</h1>
   <p class="subtitle">Sign in to manage lessons, update content, and keep the classroom materials current.</p>
 
@@ -29,7 +32,10 @@
         <span class="btn-spinner" aria-hidden="true"></span>
         <span class="sr-only">Signing in…</span>
       } @else {
-        Sign In
+        <span class="icon-with-label">
+          <span class="material-symbols-rounded" aria-hidden="true">login</span>
+          <span>Sign In</span>
+        </span>
       }
     </button>
 

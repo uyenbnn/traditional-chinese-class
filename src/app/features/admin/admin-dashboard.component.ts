@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { GrammarItem, Lesson, LessonPayload, TestQuestion, VocabularyItem } from '../../models/lesson.model';
+import { IconComponent } from '../../shared/icon/icon.component';
 import { LessonService } from '../../services/lesson.service';
 
 type VocabularyRowForm = FormGroup<{
@@ -30,7 +31,7 @@ type TestRowForm = FormGroup<{
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [AsyncPipe, ReactiveFormsModule],
+  imports: [AsyncPipe, ReactiveFormsModule, IconComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -170,7 +171,6 @@ export class AdminDashboardComponent {
 
   private buildLessonPayload(): LessonPayload {
     const value = this.lessonForm.getRawValue();
-    const now = new Date().toISOString();
 
     return {
       title: value.title.trim(),
@@ -193,9 +193,7 @@ export class AdminDashboardComponent {
         question: row.question.trim(),
         options: [row.optionA.trim(), row.optionB.trim(), row.optionC.trim(), row.optionD.trim()],
         correctAnswerIndex: row.correctAnswerIndex
-      })),
-      createdAt: now,
-      updatedAt: now
+      }))
     };
   }
 

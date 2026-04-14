@@ -11,7 +11,7 @@
 .toast {
   position: fixed;
   right: 1rem;
-  top: max(0.75rem, env(safe-area-inset-top));
+  top: calc(env(safe-area-inset-top) + 6.75rem);
   z-index: 2000;
   background: linear-gradient(135deg, var(--success), #7aa182);
   color: #fff;
@@ -20,6 +20,12 @@
   font-weight: 700;
   box-shadow: 0 14px 28px rgba(44, 84, 53, 0.22);
   animation: toast-in 180ms ease-out;
+}
+
+@media (max-width: 48rem) {
+  .toast {
+    top: calc(env(safe-area-inset-top) + 8.5rem);
+  }
 }
 
 @keyframes toast-in {
@@ -133,6 +139,10 @@ textarea {
   padding: 0.55rem 0.75rem;
   background: rgba(255, 255, 255, 0.82);
   cursor: pointer;
+}
+
+.checkbox .icon-with-label {
+  align-items: center;
 }
 
 .checkbox input[type='checkbox'] {

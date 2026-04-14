@@ -31,4 +31,4 @@ export interface Lesson {
   updatedAt: string;
 }
 
-export type LessonPayload = Omit<Lesson, 'id'>;
+export type LessonPayload = Omit<Lesson, 'id' | 'createdAt' | 'updatedAt'>;

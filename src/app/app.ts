@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 import { routeAnimations } from './animations/transitions';
+import { IconComponent } from './shared/icon/icon.component';
 import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, IconComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   animations: [routeAnimations],

@@ -50,7 +50,10 @@
           [class.active]="selectedTab() === 'vocabulary'"
           (click)="selectTab('vocabulary')"
         >
-          Vocabulary
+          <span class="icon-with-label">
+            <app-icon name="menu_book" size="sm" [decorative]="true"></app-icon>
+            <span>Vocabulary</span>
+          </span>
         </button>
         <button
           type="button"
@@ -60,7 +63,10 @@
           [class.active]="selectedTab() === 'grammar'"
           (click)="selectTab('grammar')"
         >
-          Grammar
+          <span class="icon-with-label">
+            <app-icon name="spellcheck" size="sm" [decorative]="true"></app-icon>
+            <span>Grammar</span>
+          </span>
         </button>
         <button
           type="button"
@@ -70,7 +76,10 @@
           [class.active]="selectedTab() === 'dialogue'"
           (click)="selectTab('dialogue')"
         >
-          Dialogue
+          <span class="icon-with-label">
+            <app-icon name="forum" size="sm" [decorative]="true"></app-icon>
+            <span>Dialogue</span>
+          </span>
         </button>
         <button
           type="button"
@@ -80,7 +89,10 @@
           [class.active]="selectedTab() === 'tests'"
           (click)="selectTab('tests')"
         >
-          Tests
+          <span class="icon-with-label">
+            <app-icon name="quiz" size="sm" [decorative]="true"></app-icon>
+            <span>Tests</span>
+          </span>
         </button>
       </nav>
 
@@ -103,7 +115,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @for (item of lesson.vocabulary; track item.word; let vocabIndex = $index) {
+                    @for (item of lesson.vocabulary; track $index; let vocabIndex = $index) {
                       <tr
                         class="vocab-row interactive-row-soft"
                         role="button"
@@ -130,7 +142,7 @@
             @if (lesson.grammar.length === 0) {
               <p class="empty-message">No grammar points yet.</p>
             } @else {
-              @for (item of lesson.grammar; track item.grammar) {
+              @for (item of lesson.grammar; track $index) {
                 <article class="card-block ui-card ui-card-block">
                   <strong>{{ item.grammar }}</strong>
                   <p>{{ item.explanation }}</p>
@@ -152,11 +164,11 @@
             @if (lesson.tests.length === 0) {
               <p class="empty-message">No test questions yet.</p>
             } @else {
-              @for (question of lesson.tests; track question.question; let questionIndex = $index) {
+              @for (question of lesson.tests; track $index; let questionIndex = $index) {
                 <article class="card-block ui-card ui-card-block">
                   <p><strong>{{ questionIndex + 1 }}.</strong> {{ question.question }}</p>
                   <div class="options">
-                    @for (option of question.options; track option; let optionIndex = $index) {
+                    @for (option of question.options; track $index; let optionIndex = $index) {
                       <button
                         type="button"
                         class="option-button ui-option-btn interactive-soft-hover interactive-active-contrast"
@@ -172,12 +184,20 @@
 
               <div class="quiz-footer">
         <div class="score-card ui-card ui-card-soft">
-          <span class="score-label">Current score</span>
+          <span class="score-label icon-with-label">
+            <app-icon name="military_tech" size="sm" [decorative]="true"></app-icon>
+            <span>Current score</span>
+          </span>
           <p>
           <strong>{{ score() }}</strong> / {{ lesson.tests.length }}
           </p>
         </div>
-                <button type="button" (click)="resetQuiz()" class="reset-button ui-option-btn interactive-soft-hover">Reset Answers</button>
+                <button type="button" (click)="resetQuiz()" class="reset-button ui-option-btn interactive-soft-hover">
+                  <span class="icon-with-label">
+                    <app-icon name="restart_alt" size="sm" [decorative]="true"></app-icon>
+                    <span>Reset Answers</span>
+                  </span>
+                </button>
               </div>
             }
           }
@@ -228,12 +248,23 @@
               <span class="vocab-count ui-muted-counter">{{ vocabularyPositionLabel() }}</span>
               <div class="vocab-actions ui-actions-wrap">
                 <button type="button" class="reset-button ui-option-btn interactive-soft-hover" (click)="showPreviousVocabulary()" [disabled]="!hasPreviousVocabulary()">
-                  Previous
+                  <span class="icon-with-label">
+                    <app-icon name="navigate_before" size="sm" [decorative]="true"></app-icon>
+                    <span>Previous</span>
+                  </span>
                 </button>
                 <button type="button" class="reset-button ui-option-btn interactive-soft-hover" (click)="showNextVocabulary()" [disabled]="!hasNextVocabulary()">
-                  Next
+                  <span class="icon-with-label">
+                    <app-icon name="navigate_next" size="sm" [decorative]="true"></app-icon>
+                    <span>Next</span>
+                  </span>
                 </button>
-                <button type="button" class="ui-btn tab-button interactive-soft-hover" (click)="closeVocabularyDetails()">Close</button>
+                <button type="button" class="ui-btn tab-button interactive-soft-hover" (click)="closeVocabularyDetails()">
+                  <span class="icon-with-label">
+                    <app-icon name="close" size="sm" [decorative]="true"></app-icon>
+                    <span>Close</span>
+                  </span>
+                </button>
               </div>
             </footer>
           </section>

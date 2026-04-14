@@ -87,6 +87,8 @@
 
 .main-nav a,
 .main-nav button {
+	display: inline-flex;
+	align-items: center;
 	border: 1px solid rgba(188, 205, 221, 0.98);
 	border-radius: 999px;
 	text-decoration: none;
@@ -167,6 +169,8 @@
 
 .footer-links a,
 .footer-links button {
+	display: inline-flex;
+	align-items: center;
 	border: 1px solid rgba(188, 205, 221, 0.98);
 	border-radius: 999px;
 	text-decoration: none;

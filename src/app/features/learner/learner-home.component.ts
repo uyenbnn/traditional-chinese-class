@@ -4,12 +4,14 @@ import { tap } from 'rxjs';
 
 import { backdropAnimation, fadeAnimation, lessonTransition, modalAnimation } from '../../animations/transitions';
 import { Lesson, VocabularyItem } from '../../models/lesson.model';
+import { IconComponent } from '../../shared/icon/icon.component';
 import { LessonService } from '../../services/lesson.service';
 
 type LessonTab = 'vocabulary' | 'grammar' | 'dialogue' | 'tests';
 
 @Component({
   selector: 'app-learner-home',
+  imports: [IconComponent],
   templateUrl: './learner-home.component.html',
   styleUrl: './learner-home.component.scss',
   animations: [backdropAnimation, modalAnimation, fadeAnimation, lessonTransition],
