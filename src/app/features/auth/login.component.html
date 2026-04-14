@@ -1,11 +1,15 @@
 <section class="auth-card" aria-labelledby="admin-login-title">
+  <p class="eyebrow">Admin workspace</p>
   <h1 id="admin-login-title">Admin Login</h1>
-  <p class="subtitle">Traditional Chinese Lesson Management Workspace</p>
+  <p class="subtitle">Sign in to manage lessons, update content, and keep the classroom materials current.</p>
 
   <form [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
+  <div class="field">
     <label for="admin-email">Admin Email</label>
     <input id="admin-email" type="email" formControlName="email" autocomplete="username" />
+  </div>
 
+  <div class="field">
     <label for="admin-password">Password</label>
     <input
       id="admin-password"
@@ -13,12 +17,13 @@
       formControlName="password"
       autocomplete="current-password"
     />
+  </div>
 
     @if (authService.errorMessage()) {
-      <p class="error" role="alert" [@errorSlide]>{{ authService.errorMessage() }}</p>
+    <p class="error" role="alert" [@errorSlide]>{{ authService.errorMessage() }}</p>
     }
 
-    <button type="submit" [disabled]="authService.isLoading()" [class.is-loading]="authService.isLoading()">
+  <button type="submit" [disabled]="authService.isLoading()" [class.is-loading]="authService.isLoading()">
       @if (authService.isLoading()) {
         <span class="btn-spinner" aria-hidden="true"></span>
         <span class="sr-only">Signing in…</span>
@@ -26,5 +31,7 @@
         Sign In
       }
     </button>
+
+  <p class="submit-hint">Use the configured admin credentials for this workspace.</p>
   </form>
 </section>

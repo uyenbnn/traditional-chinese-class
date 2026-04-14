@@ -1,7 +1,8 @@
 <section class="learner-layout" aria-labelledby="learner-title">
   <aside class="panel lesson-list-panel">
+	<p class="eyebrow">Learner space</p>
     <h1 id="learner-title">Traditional Chinese Lessons</h1>
-    <p class="subtitle">Choose a lesson and begin your study.</p>
+	<p class="subtitle">Choose a lesson and move through vocabulary, grammar, dialogue, and a short review.</p>
 
     @if (lessonsLoading()) {
       <div class="skeleton-list" [@fadeAnimation]>
@@ -17,11 +18,13 @@
           <li>
             <button
               type="button"
-              class="lesson-button"
+              class="lesson-button interactive-soft-hover interactive-active-contrast"
               [class.active]="selectedLesson()?.id === lesson.id"
               (click)="selectLesson(lesson.id)"
             >
-              {{ lesson.title }}
+    				<span class="lesson-button-kicker interactive-subtle">Lesson</span>
+    				<span class="lesson-button-title interactive-strong">{{ lesson.title }}</span>
+    				<span class="lesson-button-meta interactive-subtle">{{ lesson.vocabulary.length }} vocabulary · {{ lesson.tests.length }} questions</span>
             </button>
           </li>
         }
@@ -32,15 +35,16 @@
   <main class="panel detail-panel">
     @if (selectedLesson(); as lesson) {
       <div class="lesson-detail-wrapper" [@lessonTransition]="selectedLessonId()">
-        <header>
+		<header class="lesson-hero">
+		  <p class="eyebrow">Current lesson</p>
           <h2>{{ lesson.title }}</h2>
-          <p>{{ lesson.summary || 'No summary for this lesson.' }}</p>
+		  <p class="lesson-summary">{{ lesson.summary || 'No summary for this lesson.' }}</p>
         </header>
 
         <nav class="tab-nav" role="tablist" aria-label="Lesson sections">
         <button
           type="button"
-          class="tab-button"
+          class="tab-button interactive-soft-hover interactive-active-contrast"
           role="tab"
           [attr.aria-selected]="selectedTab() === 'vocabulary'"
           [class.active]="selectedTab() === 'vocabulary'"
@@ -50,7 +54,7 @@
         </button>
         <button
           type="button"
-          class="tab-button"
+          class="tab-button interactive-soft-hover interactive-active-contrast"
           role="tab"
           [attr.aria-selected]="selectedTab() === 'grammar'"
           [class.active]="selectedTab() === 'grammar'"
@@ -60,7 +64,7 @@
         </button>
         <button
           type="button"
-          class="tab-button"
+          class="tab-button interactive-soft-hover interactive-active-contrast"
           role="tab"
           [attr.aria-selected]="selectedTab() === 'dialogue'"
           [class.active]="selectedTab() === 'dialogue'"
@@ -70,7 +74,7 @@
         </button>
         <button
           type="button"
-          class="tab-button"
+          class="tab-button interactive-soft-hover interactive-active-contrast"
           role="tab"
           [attr.aria-selected]="selectedTab() === 'tests'"
           [class.active]="selectedTab() === 'tests'"
@@ -101,7 +105,7 @@
                   <tbody>
                     @for (item of lesson.vocabulary; track item.word; let vocabIndex = $index) {
                       <tr
-                        class="vocab-row"
+                        class="vocab-row interactive-row-soft"
                         role="button"
                         tabindex="0"
                         (click)="openVocabularyDetails(vocabIndex)"
@@ -155,7 +159,7 @@
                     @for (option of question.options; track option; let optionIndex = $index) {
                       <button
                         type="button"
-                        class="option-button"
+                        class="option-button interactive-soft-hover interactive-active-contrast"
                         [class.selected]="selectedAnswers()[questionIndex] === optionIndex"
                         (click)="selectAnswer(questionIndex, optionIndex)"
                       >
@@ -167,10 +171,13 @@
               }
 
               <div class="quiz-footer">
-                <p>
-                  Score: <strong>{{ score() }}</strong> / {{ lesson.tests.length }}
-                </p>
-                <button type="button" (click)="resetQuiz()" class="reset-button">Reset Answers</button>
+        <div class="score-card">
+          <span class="score-label">Current score</span>
+          <p>
+          <strong>{{ score() }}</strong> / {{ lesson.tests.length }}
+          </p>
+        </div>
+                <button type="button" (click)="resetQuiz()" class="reset-button interactive-soft-hover">Reset Answers</button>
               </div>
             }
           }
@@ -202,6 +209,7 @@
               </div>
 
               <div class="vocab-info-panel">
+				<p class="eyebrow">Vocabulary card</p>
                 <p class="vocab-meta-label">Pinyin</p>
                 <p class="vocab-meta-value">{{ vocabulary.pinyin || 'No pinyin yet.' }}</p>
 
@@ -219,13 +227,13 @@
             <footer class="vocab-modal-footer">
               <span class="vocab-count">{{ vocabularyPositionLabel() }}</span>
               <div class="vocab-actions">
-                <button type="button" class="reset-button" (click)="showPreviousVocabulary()" [disabled]="!hasPreviousVocabulary()">
+                <button type="button" class="reset-button interactive-soft-hover" (click)="showPreviousVocabulary()" [disabled]="!hasPreviousVocabulary()">
                   Previous
                 </button>
-                <button type="button" class="reset-button" (click)="showNextVocabulary()" [disabled]="!hasNextVocabulary()">
+                <button type="button" class="reset-button interactive-soft-hover" (click)="showNextVocabulary()" [disabled]="!hasNextVocabulary()">
                   Next
                 </button>
-                <button type="button" class="tab-button" (click)="closeVocabularyDetails()">Close</button>
+                <button type="button" class="tab-button interactive-soft-hover" (click)="closeVocabularyDetails()">Close</button>
               </div>
             </footer>
           </section>

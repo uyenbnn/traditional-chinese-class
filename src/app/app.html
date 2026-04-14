@@ -9,16 +9,16 @@
     </div>
 
     <nav class="main-nav" aria-label="Primary">
-      <a routerLink="/learn" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">
+      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/learn" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">
         Learn
       </a>
-      <a routerLink="/admin" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">
+      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/admin" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">
         Admin
       </a>
       @if (!authService.isAuthenticated()) {
-        <a routerLink="/auth/login" routerLinkActive="active-link">Sign In</a>
+        <a class="interactive-soft-hover interactive-active-contrast" routerLink="/auth/login" routerLinkActive="active-link">Sign In</a>
       } @else {
-        <button type="button" (click)="logout()">Sign Out</button>
+        <button class="interactive-soft-hover" type="button" (click)="logout()">Sign Out</button>
       }
     </nav>
   </header>

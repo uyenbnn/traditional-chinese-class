@@ -4,8 +4,11 @@
   }
 
   <div class="panel left-panel">
+  <header class="workspace-header">
+    <p class="eyebrow">Admin space</p>
     <h1 id="admin-workspace-title">Admin Workspace</h1>
-    <p class="hint">Create, update, and publish lessons for learners.</p>
+    <p class="hint">Create, update, and publish lessons for learners with a calmer, cleaner editing flow.</p>
+  </header>
 
     @if (statusMessage()) {
       <p class="status" role="status">{{ statusMessage() }}</p>
@@ -24,7 +27,7 @@
       <section class="editor-section" aria-labelledby="vocabulary-table-title">
         <div class="section-header">
           <h3 id="vocabulary-table-title">Vocabulary</h3>
-          <button type="button" class="secondary" (click)="addVocabularyRow()">Add Row</button>
+          <button type="button" class="secondary interactive-soft-hover" (click)="addVocabularyRow()">Add Row</button>
         </div>
 
         <div class="table-wrap" formArrayName="vocabulary">
@@ -62,7 +65,7 @@
       <section class="editor-section" aria-labelledby="grammar-table-title">
         <div class="section-header">
           <h3 id="grammar-table-title">Grammar</h3>
-          <button type="button" class="secondary" (click)="addGrammarRow()">Add Row</button>
+          <button type="button" class="secondary interactive-soft-hover" (click)="addGrammarRow()">Add Row</button>
         </div>
 
         <div class="table-wrap" formArrayName="grammar">
@@ -94,7 +97,7 @@
       <section class="editor-section" aria-labelledby="tests-table-title">
         <div class="section-header">
           <h3 id="tests-table-title">Tests</h3>
-          <button type="button" class="secondary" (click)="addTestRow()">Add Row</button>
+          <button type="button" class="secondary interactive-soft-hover" (click)="addTestRow()">Add Row</button>
         </div>
 
         <div class="table-wrap" formArrayName="tests">
@@ -143,12 +146,13 @@
 
       <div class="actions">
         <button type="submit">{{ selectedLessonId() ? 'Update Lesson' : 'Create Lesson' }}</button>
-        <button type="button" class="secondary" (click)="clearForm()">Clear</button>
+        <button type="button" class="secondary interactive-soft-hover" (click)="clearForm()">Clear</button>
       </div>
     </form>
   </div>
 
   <div class="panel right-panel">
+	<p class="eyebrow">Library</p>
     <h2>Lessons</h2>
 
     @if (lessons$ | async; as lessons) {
@@ -157,15 +161,18 @@
       } @else {
         <ul class="lesson-list">
           @for (lesson of lessons; track lesson.id) {
-            <li>
+            <li class="interactive-surface-soft">
               <div>
                 <h3>{{ lesson.title }}</h3>
                 <p>{{ lesson.summary || 'No summary yet.' }}</p>
-                <small>{{ lesson.isPublished ? 'Published' : 'Draft' }}</small>
+				<div class="lesson-meta">
+				  <small class="status-badge" [class.is-draft]="!lesson.isPublished">{{ lesson.isPublished ? 'Published' : 'Draft' }}</small>
+				  <small>{{ lesson.vocabulary.length }} vocab · {{ lesson.tests.length }} questions</small>
+				</div>
               </div>
 
               <div class="row-actions">
-                <button type="button" class="secondary" (click)="editLesson(lesson)">Edit</button>
+                <button type="button" class="secondary interactive-soft-hover" (click)="editLesson(lesson)">Edit</button>
                 <button type="button" class="danger" (click)="deleteLesson(lesson.id)">Delete</button>
               </div>
             </li>
