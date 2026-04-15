@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { GrammarItem, Lesson, LessonPayload, TestQuestion, VocabularyItem } from '../../models/lesson.model';
+import { GrammarItem, Lesson, LessonDifficulty, LESSON_DIFFICULTIES, LessonPayload, TestQuestion, VocabularyItem } from '../../models/lesson.model';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { LessonService } from '../../services/lesson.service';
 
@@ -41,6 +41,7 @@ export class AdminDashboardComponent {
   private readonly lessonService = inject(LessonService);
   private toastTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
+  readonly difficultyOptions = LESSON_DIFFICULTIES;
   readonly lessons$ = this.lessonService.listLessons();
   readonly statusMessage = signal('');
   readonly toastMessage = signal('');
@@ -49,6 +50,8 @@ export class AdminDashboardComponent {
 
   readonly lessonForm = this.formBuilder.nonNullable.group({
     title: ['', Validators.required],
+    category: ['General', Validators.required],
+    difficulty: ['beginner' as LessonDifficulty, Validators.required],
     summary: [''],
     dialogue: [''],
     isPublished: [true],
@@ -101,6 +104,8 @@ export class AdminDashboardComponent {
     this.selectedLessonId.set(lesson.id);
     this.lessonForm.patchValue({
       title: lesson.title,
+      category: lesson.category,
+      difficulty: lesson.difficulty,
       summary: lesson.summary,
       dialogue: lesson.dialogue,
       isPublished: lesson.isPublished
@@ -127,6 +132,8 @@ export class AdminDashboardComponent {
     this.selectedLessonId.set(null);
     this.lessonForm.reset({
       title: '',
+      category: 'General',
+      difficulty: 'beginner',
       summary: '',
       dialogue: '',
       isPublished: true
@@ -169,11 +176,24 @@ export class AdminDashboardComponent {
     }
   }
 
+  difficultyLabel(difficulty: LessonDifficulty): string {
+    switch (difficulty) {
+      case 'beginner':
+        return 'Beginner';
+      case 'elementary':
+        return 'Elementary';
+      case 'intermediate':
+        return 'Intermediate';
+    }
+  }
+
   private buildLessonPayload(): LessonPayload {
     const value = this.lessonForm.getRawValue();
 
     return {
       title: value.title.trim(),
+      category: value.category.trim() || 'General',
+      difficulty: value.difficulty,
       summary: value.summary.trim(),
       dialogue: value.dialogue.trim(),
       isPublished: value.isPublished,

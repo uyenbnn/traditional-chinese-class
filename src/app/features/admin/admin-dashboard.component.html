@@ -18,6 +18,16 @@
       <label class="ui-form-label" for="lesson-title">Lesson Title</label>
       <input class="ui-form-control" id="lesson-title" formControlName="title" type="text" />
 
+      <label class="ui-form-label" for="lesson-category">Category</label>
+      <input class="ui-form-control" id="lesson-category" formControlName="category" type="text" placeholder="Greetings, Numbers, Daily life" />
+
+      <label class="ui-form-label" for="lesson-difficulty">Difficulty</label>
+      <select class="ui-form-control" id="lesson-difficulty" formControlName="difficulty">
+        @for (difficulty of difficultyOptions; track difficulty) {
+          <option [value]="difficulty">{{ difficultyLabel(difficulty) }}</option>
+        }
+      </select>
+
       <label class="ui-form-label" for="lesson-summary">Summary</label>
       <textarea class="ui-form-control" id="lesson-summary" formControlName="summary" rows="2"></textarea>
 
@@ -210,6 +220,8 @@
                 <p>{{ lesson.summary || 'No summary yet.' }}</p>
 				<div class="lesson-meta">
 				  <small class="status-badge" [class.is-draft]="!lesson.isPublished">{{ lesson.isPublished ? 'Published' : 'Draft' }}</small>
+          <small class="meta-chip">{{ lesson.category }}</small>
+          <small class="meta-chip">{{ difficultyLabel(lesson.difficulty) }}</small>
 				  <small>{{ lesson.vocabulary.length }} vocab · {{ lesson.tests.length }} questions</small>
 				</div>
               </div>

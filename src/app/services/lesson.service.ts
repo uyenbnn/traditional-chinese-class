@@ -9,8 +9,19 @@ import {
 } from 'firebase/database';
 import { Observable } from 'rxjs';
 
-import { Lesson, LessonPayload } from '../models/lesson.model';
+import { Lesson, LessonDifficulty, LessonPayload } from '../models/lesson.model';
 import { FirebaseService } from './firebase.service';
+
+type LessonRecord = Partial<Omit<Lesson, 'id'>>;
+type RealtimeSnapshot = {
+  exists(): boolean;
+  val(): unknown;
+};
+type ObservableSubscriber<T> = {
+  next(value: T): void;
+  error(error: unknown): void;
+  complete(): void;
+};
 
 @Injectable({
   providedIn: 'root'
@@ -23,21 +34,18 @@ export class LessonService {
   }
 
   listLessons(): Observable<Lesson[]> {
-    return new Observable<Lesson[]>((subscriber) => {
+    return new Observable<Lesson[]>((subscriber: ObservableSubscriber<Lesson[]>) => {
       const unsubscribe = onValue(
         this.lessonsRef,
-        (snapshot) => {
-          const lessonsRecord = (snapshot.val() as Record<string, Omit<Lesson, 'id'>> | null) ?? {};
+        (snapshot: RealtimeSnapshot) => {
+          const lessonsRecord = (snapshot.val() as Record<string, LessonRecord> | null) ?? {};
           const lessons = Object.entries(lessonsRecord)
-            .map(([id, lesson]) => ({
-              ...lesson,
-              id
-            }))
+            .map(([id, lesson]) => this.normalizeLesson(id, lesson))
             .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
 
           subscriber.next(lessons);
         },
-        (error) => subscriber.error(error)
+        (error: unknown) => subscriber.error(error)
       );
 
       return () => unsubscribe();
@@ -45,7 +53,7 @@ export class LessonService {
   }
 
   getLessonById(lessonId: string): Observable<Lesson | null> {
-    return new Observable<Lesson | null>((subscriber) => {
+    return new Observable<Lesson | null>((subscriber: ObservableSubscriber<Lesson | null>) => {
       if (!lessonId) {
         subscriber.next(null);
         subscriber.complete();
@@ -54,20 +62,17 @@ export class LessonService {
 
       const lessonRef = ref(this.firebaseService.database, `lessons/${lessonId}`);
       get(lessonRef)
-        .then((snapshot) => {
+        .then((snapshot: RealtimeSnapshot) => {
           if (!snapshot.exists()) {
             subscriber.next(null);
             subscriber.complete();
             return;
           }
 
-          subscriber.next({
-              ...(snapshot.val() as Omit<Lesson, 'id'>),
-            id: lessonId
-          });
+          subscriber.next(this.normalizeLesson(lessonId, snapshot.val() as LessonRecord));
           subscriber.complete();
         })
-        .catch((error) => subscriber.error(error));
+        .catch((error: unknown) => subscriber.error(error));
     });
   }
 
@@ -99,12 +104,11 @@ export class LessonService {
       throw new Error('Lesson not found.');
     }
 
-    const existingLesson = snapshot.val() as Omit<Lesson, 'id'>;
+    const existingLesson = this.normalizeLesson(lessonId, snapshot.val() as LessonRecord);
     const now = new Date().toISOString();
 
     await set(lessonRef, {
       ...payload,
-      id: lessonId,
       createdAt: existingLesson.createdAt,
       updatedAt: now
     });
@@ -113,5 +117,33 @@ export class LessonService {
   async deleteLesson(lessonId: string): Promise<void> {
     const lessonRef = ref(this.firebaseService.database, `lessons/${lessonId}`);
     await remove(lessonRef);
+  }
+
+  private normalizeLesson(lessonId: string, lesson: LessonRecord): Lesson {
+    const createdAt = lesson.createdAt ?? new Date(0).toISOString();
+    const updatedAt = lesson.updatedAt ?? createdAt;
+
+    return {
+      id: lessonId,
+      title: lesson.title ?? 'Untitled lesson',
+      category: lesson.category?.trim() || 'General',
+      difficulty: this.normalizeDifficulty(lesson.difficulty),
+      summary: lesson.summary ?? '',
+      vocabulary: lesson.vocabulary ?? [],
+      grammar: lesson.grammar ?? [],
+      dialogue: lesson.dialogue ?? '',
+      tests: lesson.tests ?? [],
+      isPublished: lesson.isPublished ?? false,
+      createdAt,
+      updatedAt
+    };
+  }
+
+  private normalizeDifficulty(value: unknown): LessonDifficulty {
+    if (value === 'beginner' || value === 'elementary' || value === 'intermediate') {
+      return value;
+    }
+
+    return 'beginner';
   }
 }

@@ -4,6 +4,43 @@
     <h1 id="learner-title">Traditional Chinese Lessons</h1>
 	<p class="subtitle">Choose a lesson and move through vocabulary, grammar, dialogue, and a short review.</p>
 
+    <section class="filter-panel ui-card ui-card-soft" aria-labelledby="lesson-filter-title">
+      <div class="filter-header">
+        <h2 id="lesson-filter-title" class="filter-title">Browse lessons</h2>
+        @if (hasActiveFilters()) {
+          <button type="button" class="clear-filters interactive-soft-hover" (click)="clearFilters()">Reset</button>
+        }
+      </div>
+
+      <label class="filter-label" for="difficulty-filter">Difficulty</label>
+      <select
+        #difficultyFilter
+        id="difficulty-filter"
+        class="filter-select ui-form-control"
+        [value]="selectedDifficulty()"
+        (change)="setDifficultyFilter(difficultyFilter.value)"
+      >
+        <option value="all">All levels</option>
+        @for (difficulty of difficultyOptions; track difficulty) {
+          <option [value]="difficulty">{{ difficultyLabel(difficulty) }}</option>
+        }
+      </select>
+
+      <label class="filter-label" for="category-filter">Category</label>
+      <select
+        #categoryFilter
+        id="category-filter"
+        class="filter-select ui-form-control"
+        [value]="selectedCategory()"
+        (change)="setCategoryFilter(categoryFilter.value)"
+      >
+        <option value="all">All categories</option>
+        @for (category of availableCategories(); track category) {
+          <option [value]="category">{{ category }}</option>
+        }
+      </select>
+    </section>
+
     @if (lessonsLoading()) {
       <div class="skeleton-list" [@fadeAnimation]>
         @for (_ of [1, 2, 3]; track $index) {
@@ -12,9 +49,11 @@
       </div>
     } @else if (publishedLessons().length === 0) {
       <p class="empty" [@fadeAnimation]>No published lessons yet.</p>
+    } @else if (filteredLessons().length === 0) {
+      <p class="empty" [@fadeAnimation]>No lessons match the current filters.</p>
     } @else {
       <ul [@fadeAnimation]>
-        @for (lesson of publishedLessons(); track lesson.id) {
+        @for (lesson of filteredLessons(); track lesson.id) {
           <li>
             <button
               type="button"
@@ -24,6 +63,10 @@
             >
     				<span class="lesson-button-kicker interactive-subtle">Lesson</span>
     				<span class="lesson-button-title interactive-strong">{{ lesson.title }}</span>
+					<span class="lesson-tag-row">
+					  <span class="lesson-pill lesson-pill-category">{{ lesson.category }}</span>
+					  <span class="lesson-pill lesson-pill-difficulty">{{ difficultyLabel(lesson.difficulty) }}</span>
+					</span>
     				<span class="lesson-button-meta interactive-subtle">{{ lesson.vocabulary.length }} vocabulary · {{ lesson.tests.length }} questions</span>
             </button>
           </li>
@@ -38,6 +81,10 @@
     <header class="lesson-hero">
       <p class="eyebrow ui-eyebrow">Current lesson</p>
           <h2>{{ lesson.title }}</h2>
+		  <div class="hero-meta">
+		    <span class="hero-pill">{{ lesson.category }}</span>
+		    <span class="hero-pill">{{ difficultyLabel(lesson.difficulty) }}</span>
+		  </div>
 		  <p class="lesson-summary">{{ lesson.summary || 'No summary for this lesson.' }}</p>
         </header>
 

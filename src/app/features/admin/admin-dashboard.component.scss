@@ -244,6 +244,16 @@ small {
   color: var(--accent-deep);
 }
 
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.26rem 0.56rem;
+  border-radius: 999px;
+  background: rgba(83, 120, 155, 0.08);
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
 @media (max-width: 60rem) {
   .panel {
     padding: 1rem;
