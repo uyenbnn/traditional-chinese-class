@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
 
 import { backdropAnimation, fadeAnimation, lessonTransition, modalAnimation } from '../../animations/transitions';
-import { Lesson, VocabularyItem } from '../../models/lesson.model';
+import { Lesson, LessonDifficulty, LESSON_DIFFICULTIES, TestQuestion, VocabularyItem } from '../../models/lesson.model';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { LessonService } from '../../services/lesson.service';
 
 type LessonTab = 'vocabulary' | 'grammar' | 'dialogue' | 'tests';
+type LessonDifficultyFilter = LessonDifficulty | 'all';
 
 @Component({
   selector: 'app-learner-home',
@@ -20,33 +21,59 @@ type LessonTab = 'vocabulary' | 'grammar' | 'dialogue' | 'tests';
 export class LearnerHomeComponent {
   private readonly lessonService = inject(LessonService);
 
+  readonly difficultyOptions = LESSON_DIFFICULTIES;
   readonly lessonsLoading = signal(true);
 
   private readonly lessons = toSignal(
     this.lessonService.listLessons().pipe(tap(() => this.lessonsLoading.set(false))),
-    { initialValue: [] as Lesson[] },
-  );
+    { initialValue: [] as Lesson[] }
+  ) as Signal<Lesson[]>;
 
   readonly selectedLessonId = signal<string | null>(null);
   readonly selectedTab = signal<LessonTab>('vocabulary');
   readonly selectedAnswers = signal<Record<number, number>>({});
   readonly selectedVocabularyIndex = signal<number | null>(null);
+  readonly selectedDifficulty = signal<LessonDifficultyFilter>('all');
+  readonly selectedCategory = signal('all');
 
   readonly publishedLessons = computed(() =>
     this.lessons()
-      .filter((lesson) => lesson.isPublished)
-      .sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
+      .filter((lesson: Lesson) => lesson.isPublished)
+      .sort((left: Lesson, right: Lesson) => Date.parse(left.createdAt) - Date.parse(right.createdAt))
   );
 
+  readonly availableCategories = computed(() => {
+    const categories = new Set<string>(
+      this.publishedLessons()
+        .map((lesson: Lesson) => lesson.category.trim())
+        .filter((category: string) => category.length > 0)
+    );
+
+    return [...categories].sort((left: string, right: string) => left.localeCompare(right));
+  });
+
+  readonly filteredLessons = computed(() => {
+    const difficulty = this.selectedDifficulty();
+    const category = this.selectedCategory();
+
+    return this.publishedLessons().filter((lesson: Lesson) => {
+      const matchesDifficulty = difficulty === 'all' || lesson.difficulty === difficulty;
+      const matchesCategory = category === 'all' || lesson.category === category;
+      return matchesDifficulty && matchesCategory;
+    });
+  });
+
+  readonly hasActiveFilters = computed(() => this.selectedDifficulty() !== 'all' || this.selectedCategory() !== 'all');
+
   readonly selectedLesson = computed(() => {
-    const published = this.publishedLessons();
+    const published = this.filteredLessons();
     const activeId = this.selectedLessonId();
 
     if (!activeId) {
       return published[0] ?? null;
     }
 
-    return published.find((lesson) => lesson.id === activeId) ?? null;
+    return published.find((lesson: Lesson) => lesson.id === activeId) ?? null;
   });
 
   readonly score = computed(() => {
@@ -55,7 +82,7 @@ export class LearnerHomeComponent {
       return 0;
     }
 
-    return lesson.tests.reduce((total, question, index) => {
+    return lesson.tests.reduce((total: number, question: TestQuestion, index: number) => {
       return this.selectedAnswers()[index] === question.correctAnswerIndex ? total + 1 : total;
     }, 0);
   });
@@ -107,7 +134,7 @@ export class LearnerHomeComponent {
         return;
       }
 
-      if (!currentId || lessons.every((lesson) => lesson.id !== currentId)) {
+      if (!currentId || lessons.every((lesson: Lesson) => lesson.id !== currentId)) {
         this.selectLesson(lessons[0].id);
       }
     });
@@ -136,6 +163,36 @@ export class LearnerHomeComponent {
 
   resetQuiz(): void {
     this.selectedAnswers.set({});
+  }
+
+  setDifficultyFilter(value: string): void {
+    if (value === 'all' || value === 'beginner' || value === 'elementary' || value === 'intermediate') {
+      this.selectedDifficulty.set(value);
+    }
+  }
+
+  setCategoryFilter(value: string): void {
+    this.selectedCategory.set(value || 'all');
+  }
+
+  clearFilters(): void {
+    this.selectedDifficulty.set('all');
+    this.selectedCategory.set('all');
+  }
+
+  difficultyLabel(difficulty: LessonDifficulty): string {
+    switch (difficulty) {
+      case 'beginner':
+        return 'Beginner';
+      case 'elementary':
+        return 'Elementary';
+      case 'intermediate':
+        return 'Intermediate';
+    }
+  }
+
+  hasAudio(item: VocabularyItem): boolean {
+    return item.audioUrl.trim().length > 0;
   }
 
   openVocabularyDetails(index: number): void {

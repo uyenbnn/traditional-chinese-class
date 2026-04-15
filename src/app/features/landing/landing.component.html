@@ -1,0 +1,115 @@
+<section class="landing-shell" aria-labelledby="landing-title">
+  <section class="hero-panel ui-panel" aria-labelledby="landing-title">
+    <div class="hero-copy">
+      <p class="ui-eyebrow icon-with-label">
+        <app-icon name="school" size="sm" [decorative]="true"></app-icon>
+        <span>Traditional Chinese study space</span>
+      </p>
+      <h1 id="landing-title">A calmer way to begin Traditional Chinese study.</h1>
+      <p class="hero-summary">
+        Move from pronunciation into complete lessons without switching tools. The app is organized for quick learner starts and simple classroom upkeep.
+      </p>
+
+      <div class="hero-actions">
+        <a class="ui-btn ui-btn-primary hero-button" routerLink="/learn">
+          <span class="icon-with-label">
+            <app-icon name="arrow_forward" size="sm" [decorative]="true"></app-icon>
+            <span>Start learning</span>
+          </span>
+        </a>
+        <a class="ui-btn ui-btn-secondary hero-button hero-button-secondary" routerLink="/learn/pinyin">
+          <span class="icon-with-label">
+            <app-icon name="record_voice_over" size="sm" [decorative]="true"></app-icon>
+            <span>Review pinyin first</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <aside class="hero-aside ui-card ui-card-soft" aria-label="Program snapshot">
+      <p class="hero-aside-kicker">What this space is built for</p>
+      <ul class="hero-stat-list">
+        @for (stat of heroStats; track stat.label) {
+          <li class="hero-stat-item">
+            <strong>{{ stat.value }}</strong>
+            <span>{{ stat.label }}</span>
+          </li>
+        }
+      </ul>
+      <div class="hero-notice">
+        <app-icon name="info" size="sm" tone="accent" [decorative]="true"></app-icon>
+        <p>Best fit for first-time learners who need a clear path into pronunciation and lesson practice.</p>
+      </div>
+    </aside>
+  </section>
+
+  <section class="feature-section" aria-labelledby="feature-title">
+    <div class="section-heading">
+      <p class="ui-eyebrow">Why learners get in faster</p>
+      <h2 id="feature-title">Built around the study decisions that matter first.</h2>
+      <p>
+        The landing page points directly into the learner flow, but the surrounding tools stay visible so pronunciation review and classroom maintenance are never hidden.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+      @for (feature of features; track feature.title) {
+        <article class="feature-card ui-card ui-card-block interactive-surface-soft">
+          <div class="feature-icon-wrap">
+            <app-icon [name]="feature.icon" size="lg" tone="accent" [decorative]="true"></app-icon>
+          </div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="study-flow ui-panel" aria-labelledby="study-flow-title">
+    <div class="section-heading section-heading-compact">
+      <p class="ui-eyebrow">How the study flow works</p>
+      <h2 id="study-flow-title">From sound training into usable lessons.</h2>
+    </div>
+
+    <div class="study-step-list">
+      @for (step of studySteps; track step.title; let stepIndex = $index) {
+        <article class="study-step ui-card ui-card-block ui-card-soft">
+          <div class="study-step-marker">
+            <span class="step-number">0{{ stepIndex + 1 }}</span>
+            <app-icon [name]="step.icon" size="lg" tone="accent" [decorative]="true"></app-icon>
+          </div>
+          <div class="study-step-copy">
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+            <p class="study-step-detail">{{ step.detail }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="cta-panel ui-panel" aria-labelledby="cta-title">
+    <div class="cta-copy">
+      <p class="ui-eyebrow">Ready to move</p>
+      <h2 id="cta-title">Go straight into lessons, or prepare the class first.</h2>
+      <p>
+        Learners can begin with the lesson library immediately. Teachers and admins can sign in to keep the material aligned with the class plan.
+      </p>
+    </div>
+
+    <div class="cta-actions">
+      <a class="ui-btn ui-btn-primary hero-button" routerLink="/learn">
+        <span class="icon-with-label">
+          <app-icon name="menu_book" size="sm" [decorative]="true"></app-icon>
+          <span>Open lessons</span>
+        </span>
+      </a>
+      <a class="ui-btn ui-btn-secondary hero-button hero-button-secondary" [routerLink]="adminRoute()">
+        <span class="icon-with-label">
+          <app-icon name="admin_panel_settings" size="sm" [decorative]="true"></app-icon>
+          <span>{{ adminLabel() }}</span>
+        </span>
+      </a>
+    </div>
+  </section>
+</section>

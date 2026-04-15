@@ -9,10 +9,22 @@
     </div>
 
     <nav class="main-nav" aria-label="Primary">
-      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/learn" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">
+      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        <span class="icon-with-label">
+          <app-icon name="home" size="sm" [decorative]="true"></app-icon>
+          <span>Home</span>
+        </span>
+      </a>
+      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/learn" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
         <span class="icon-with-label">
           <app-icon name="school" size="sm" [decorative]="true"></app-icon>
           <span>Learn</span>
+        </span>
+      </a>
+      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/learn/pinyin" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        <span class="icon-with-label">
+          <app-icon name="record_voice_over" size="sm" [decorative]="true"></app-icon>
+          <span>Pinyin</span>
         </span>
       </a>
       <a class="interactive-soft-hover interactive-active-contrast" routerLink="/admin" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">
@@ -52,10 +64,22 @@
       </div>
 
       <nav class="footer-links" aria-label="Footer navigation">
+        <a class="interactive-soft-hover" routerLink="/">
+          <span class="icon-with-label">
+            <app-icon name="home" size="sm" [decorative]="true"></app-icon>
+            <span>Landing Page</span>
+          </span>
+        </a>
         <a class="interactive-soft-hover" routerLink="/learn">
           <span class="icon-with-label">
             <app-icon name="menu_book" size="sm" [decorative]="true"></app-icon>
             <span>Learning Area</span>
+          </span>
+        </a>
+        <a class="interactive-soft-hover" routerLink="/learn/pinyin">
+          <span class="icon-with-label">
+            <app-icon name="record_voice_over" size="sm" [decorative]="true"></app-icon>
+            <span>Pinyin Guide</span>
           </span>
         </a>
         <a class="interactive-soft-hover" routerLink="/admin">

@@ -7,7 +7,8 @@ export const routes: Routes = [
 	{
 		path: '',
 		pathMatch: 'full',
-		redirectTo: 'learn'
+		data: { animation: 'landing' },
+		loadComponent: () => import('./features/landing/landing.component').then((m) => m.LandingComponent)
 	},
 	{
 		path: 'learn',
@@ -27,6 +28,6 @@ export const routes: Routes = [
 	},
 	{
 		path: '**',
-		redirectTo: 'learn'
+		redirectTo: ''
 	}
 ];
