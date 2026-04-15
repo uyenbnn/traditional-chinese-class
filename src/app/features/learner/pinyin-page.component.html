@@ -1,0 +1,222 @@
+<section class="pinyin-page" aria-labelledby="pinyin-page-title">
+  <header class="hero ui-panel">
+    <p class="ui-eyebrow">Pronunciation guide</p>
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <h1 id="pinyin-page-title">Pinyin curriculum for tones, syllables, and connected speech</h1>
+        <p class="hero-summary">
+          This page now follows a concrete teaching order: build the syllable, master the tones, separate high-confusion initials and finals,
+          then move into tone-change patterns and short spoken phrases.
+        </p>
+
+        <div class="hero-actions">
+          <a class="hero-link interactive-soft-hover interactive-active-contrast" routerLink="/learn">
+            <span class="icon-with-label">
+              <app-icon name="arrow_back" size="sm" [decorative]="true"></app-icon>
+              <span>Back to lessons</span>
+            </span>
+          </a>
+          <button class="hero-link interactive-soft-hover" type="button" (click)="selectStep('tones')">
+            <span class="icon-with-label">
+              <app-icon name="south" size="sm" [decorative]="true"></app-icon>
+              <span>Open tone lesson</span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <aside class="hero-note ui-card ui-card-soft" aria-label="Study intention">
+        <p class="note-label">Teaching sequence</p>
+        <p class="note-title">Accuracy first, fluency second.</p>
+        <p>
+          Train isolated sounds before phrases. If learners skip that order, most errors become habits in tone and consonant contrast.
+        </p>
+      </aside>
+    </div>
+  </header>
+
+  <section class="principles-grid" role="tablist" aria-label="Curriculum sequence">
+    @for (step of curriculumSteps; track step.title) {
+      <button
+        type="button"
+        class="principle-card ui-card ui-card-block interactive-soft-hover interactive-active-contrast"
+        role="tab"
+        [id]="'curriculum-tab-' + step.id"
+        [attr.aria-selected]="selectedStepId() === step.id"
+        [attr.aria-controls]="'curriculum-panel-' + step.id"
+        [class.active]="selectedStepId() === step.id"
+        (click)="selectStep(step.id)"
+      >
+        <span class="principle-icon" aria-hidden="true">
+          <app-icon [name]="step.icon" size="lg" [decorative]="true"></app-icon>
+        </span>
+        <h2>{{ step.title }}</h2>
+        <p>{{ step.description }}</p>
+      </button>
+    }
+  </section>
+
+  <section class="curriculum-panel ui-panel" [id]="'curriculum-panel-' + selectedStepId()" role="tabpanel" [attr.aria-labelledby]="'curriculum-tab-' + selectedStepId()">
+    @switch (selectedStepId()) {
+      @case ('syllable') {
+        <div class="section-heading">
+          <p class="ui-eyebrow">Syllable structure</p>
+          <h2 id="syllable-heading">Build the syllable before full-word speed</h2>
+          <p>Every pinyin syllable should be taught as a complete sound unit. Learners first need to hear how the opening, vowel body, and tone work together.</p>
+        </div>
+
+        <div class="syllable-grid">
+          @for (part of syllableParts; track part.label) {
+            <article class="family-card ui-card ui-card-block">
+              <h3>{{ part.label }}</h3>
+              <p>{{ part.explanation }}</p>
+              <p class="family-sample"><strong>Examples:</strong> {{ part.examples }}</p>
+              <p class="family-contrast"><strong>Teaching focus:</strong> {{ part.focus }}</p>
+            </article>
+          }
+        </div>
+
+        <section class="reference-panel section-subpanel" aria-labelledby="finals-heading">
+          <div class="section-heading compact-heading">
+            <p class="ui-eyebrow">Finals first</p>
+            <h3 id="finals-heading">Core final groups to stabilize early</h3>
+          </div>
+
+          <div class="family-list">
+            @for (group of finalGroups; track group.family) {
+              <article class="family-card ui-card ui-card-block">
+                <div class="family-header">
+                  <h3>{{ group.family }}</h3>
+                  <p class="family-examples">{{ group.examples.join(' · ') }}</p>
+                </div>
+                <p>{{ group.cue }}</p>
+                <p class="family-sample"><strong>Sample set:</strong> {{ group.sample }}</p>
+              </article>
+            }
+          </div>
+        </section>
+      }
+
+      @case ('tones') {
+        <section id="tone-section" class="tone-panel" aria-labelledby="tone-heading">
+          <div class="section-heading">
+            <p class="ui-eyebrow">Tone system</p>
+            <h2 id="tone-heading">The four tones plus neutral tone</h2>
+            <p>Teach the tone contour as part of the syllable from the beginning. Students should hear and reproduce shape, not just memorize marks.</p>
+          </div>
+
+          <div class="tone-grid">
+            @for (tone of toneCards; track tone.id) {
+              <article class="tone-card ui-card ui-card-block">
+                <p class="tone-mark">{{ tone.mark }}</p>
+                <h3>{{ tone.title }}</h3>
+                <p class="tone-contour">{{ tone.contour }}</p>
+                <p>{{ tone.description }}</p>
+                <p class="tone-example"><strong>Examples:</strong> {{ tone.example }}</p>
+                <p class="tone-coaching">{{ tone.coaching }}</p>
+              </article>
+            }
+          </div>
+        </section>
+      }
+
+      @case ('contrasts') {
+        <div class="content-grid split-balanced">
+          <section class="reference-panel section-subpanel" aria-labelledby="initials-heading">
+            <div class="section-heading compact-heading">
+              <p class="ui-eyebrow">Initials</p>
+              <h2 id="initials-heading">Consonant families to teach in contrast</h2>
+              <p>Teach initials by mouth position and by confusion pair, not by alphabetical order alone.</p>
+            </div>
+
+            <div class="family-list">
+              @for (group of initialGroups; track group.family) {
+                <article class="family-card ui-card ui-card-block">
+                  <div class="family-header">
+                    <h3>{{ group.family }}</h3>
+                    <p class="family-examples">{{ group.examples.join(' · ') }}</p>
+                  </div>
+                  <p>{{ group.articulation }}</p>
+                  <p class="family-contrast"><strong>Teaching contrast:</strong> {{ group.contrast }}</p>
+                </article>
+              }
+            </div>
+          </section>
+
+          <section class="reference-panel section-subpanel" aria-labelledby="contrast-finals-heading">
+            <div class="section-heading compact-heading">
+              <p class="ui-eyebrow">Finals</p>
+              <h2 id="contrast-finals-heading">Vowel and ending groups that shape the syllable</h2>
+              <p>Once the initial is stable, learners need a clean final so the tone has somewhere reliable to sit.</p>
+            </div>
+
+            <div class="family-list">
+              @for (group of finalGroups; track group.family) {
+                <article class="family-card ui-card ui-card-block">
+                  <div class="family-header">
+                    <h3>{{ group.family }}</h3>
+                    <p class="family-examples">{{ group.examples.join(' · ') }}</p>
+                  </div>
+                  <p>{{ group.cue }}</p>
+                  <p class="family-sample"><strong>Sample set:</strong> {{ group.sample }}</p>
+                </article>
+              }
+            </div>
+          </section>
+        </div>
+      }
+
+      @case ('speech') {
+        <section class="rules-panel" aria-labelledby="rules-heading">
+          <div class="section-heading">
+            <p class="ui-eyebrow">Connected speech</p>
+            <h2 id="rules-heading">Tone rules learners need early</h2>
+            <p>Students should not wait too long to hear natural tone behavior. Introduce these rules once isolated tones are stable.</p>
+          </div>
+
+          <div class="rules-grid">
+            @for (rule of toneRules; track rule.title) {
+              <article class="rule-card ui-card ui-card-block">
+                <h3>{{ rule.title }}</h3>
+                <p>{{ rule.summary }}</p>
+                <p class="rule-examples"><strong>Examples:</strong> {{ rule.examples }}</p>
+                <p class="rule-reminder">{{ rule.reminder }}</p>
+              </article>
+            }
+          </div>
+        </section>
+
+        <section class="practice-panel section-subpanel" aria-labelledby="practice-heading">
+          <div class="section-heading compact-heading">
+            <p class="ui-eyebrow">Guided drills</p>
+            <h2 id="practice-heading">Short phrases to rehearse aloud</h2>
+            <p>Use these after sound and tone study. Keep the speed low enough that every contrast is still audible.</p>
+          </div>
+
+          <div class="ui-table-scroll">
+            <table class="ui-table-base ui-table-readable practice-table">
+              <thead>
+                <tr>
+                  <th scope="col">Hanzi</th>
+                  <th scope="col">Pinyin</th>
+                  <th scope="col">Meaning</th>
+                  <th scope="col">Pronunciation tip</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (example of practiceExamples; track example.hanzi) {
+                  <tr>
+                    <td class="practice-hanzi">{{ example.hanzi }}</td>
+                    <td class="practice-pinyin">{{ example.pinyin }}</td>
+                    <td>{{ example.meaning }}</td>
+                    <td>{{ example.tip }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </section>
+      }
+    }
+  </section>
+</section>
