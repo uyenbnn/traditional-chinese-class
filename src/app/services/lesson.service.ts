@@ -129,7 +129,7 @@ export class LessonService {
       category: lesson.category?.trim() || 'General',
       difficulty: this.normalizeDifficulty(lesson.difficulty),
       summary: lesson.summary ?? '',
-      vocabulary: lesson.vocabulary ?? [],
+      vocabulary: (lesson.vocabulary ?? []).map((item) => this.normalizeVocabularyItem(item)),
       grammar: lesson.grammar ?? [],
       dialogue: lesson.dialogue ?? '',
       tests: lesson.tests ?? [],
@@ -145,5 +145,16 @@ export class LessonService {
     }
 
     return 'beginner';
+  }
+
+  private normalizeVocabularyItem(item: Partial<Lesson['vocabulary'][number]> | undefined): Lesson['vocabulary'][number] {
+    return {
+      word: item?.word ?? '',
+      pinyin: item?.pinyin ?? '',
+      meaning: item?.meaning ?? '',
+      exampleSentence: item?.exampleSentence ?? '',
+      note: item?.note ?? '',
+      audioUrl: item?.audioUrl?.trim() ?? ''
+    };
   }
 }

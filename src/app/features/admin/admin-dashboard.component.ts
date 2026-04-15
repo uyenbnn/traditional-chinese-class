@@ -12,6 +12,7 @@ type VocabularyRowForm = FormGroup<{
   meaning: FormControl<string>;
   exampleSentence: FormControl<string>;
   note: FormControl<string>;
+  audioUrl: FormControl<string>;
 }>;
 
 type GrammarRowForm = FormGroup<{
@@ -202,7 +203,8 @@ export class AdminDashboardComponent {
         pinyin: row.pinyin.trim(),
         meaning: row.meaning.trim(),
         exampleSentence: row.exampleSentence.trim(),
-        note: row.note.trim()
+        note: row.note.trim(),
+        audioUrl: row.audioUrl.trim()
       })),
       grammar: value.grammar.map((row) => ({
         grammar: row.grammar.trim(),
@@ -223,7 +225,8 @@ export class AdminDashboardComponent {
       pinyin: [item?.pinyin ?? ''],
       meaning: [item?.meaning ?? ''],
       exampleSentence: [item?.exampleSentence ?? ''],
-      note: [item?.note ?? '']
+      note: [item?.note ?? ''],
+      audioUrl: [item?.audioUrl ?? '']
     });
   }
 

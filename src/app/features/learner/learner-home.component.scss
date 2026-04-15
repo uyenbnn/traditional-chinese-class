@@ -130,6 +130,16 @@ ul {
   color: rgba(244, 249, 255, 0.82);
 }
 
+.lesson-button.active .lesson-pill-category {
+  background: rgba(244, 249, 255, 0.18);
+  color: var(--on-accent);
+}
+
+.lesson-button.active .lesson-pill-difficulty {
+  background: rgba(198, 242, 213, 0.22);
+  color: rgba(244, 249, 255, 0.9);
+}
+
 .lesson-button.active .lesson-button-title {
   color: var(--on-accent);
 }
@@ -260,10 +270,24 @@ h3 {
 }
 
 table {
-  min-width: 38rem;
+  min-width: 45rem;
   background: rgba(255, 255, 255, 0.72);
   border-radius: var(--radius-md);
   overflow: hidden;
+}
+
+.audio-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--accent-deep);
+  font-weight: 700;
+  font-size: var(--text-xs);
+}
+
+.audio-missing {
+  color: var(--ink-muted);
+  font-size: var(--text-xs);
 }
 
 .example {
@@ -314,6 +338,25 @@ table {
   line-height: 1;
   color: var(--accent-deep);
   font-weight: 700;
+}
+
+.audio-player-card {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 0.15rem;
+  padding: 0.9rem;
+}
+
+.audio-player-header {
+  color: var(--ink-soft);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vocab-audio-player {
+  width: 100%;
 }
 
 /* ── Skeleton loader ──────────────────────────────────────── */
@@ -370,7 +413,7 @@ table {
   }
 
   table {
-    min-width: 30rem;
+    min-width: 34rem;
   }
 
   .vocab-word {

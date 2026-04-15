@@ -54,6 +54,7 @@
                 <th scope="col">Meaning</th>
                 <th scope="col">Example Sentence</th>
                 <th scope="col">Note</th>
+                <th scope="col">Audio URL</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -67,6 +68,15 @@
                     <input class="ui-form-control" [id]="'vocabulary-example-' + i" formControlName="exampleSentence" type="text" />
                   </td>
                   <td><input class="ui-form-control" [id]="'vocabulary-note-' + i" formControlName="note" type="text" /></td>
+                  <td>
+                    <input
+                      class="ui-form-control"
+                      [id]="'vocabulary-audio-url-' + i"
+                      formControlName="audioUrl"
+                      type="url"
+                      placeholder="https://.../audio.mp3"
+                    />
+                  </td>
                   <td>
                     <button type="button" class="ui-btn ui-btn-danger danger" (click)="removeVocabularyRow(i)">
                       <span class="icon-with-label">
@@ -220,8 +230,8 @@
                 <p>{{ lesson.summary || 'No summary yet.' }}</p>
 				<div class="lesson-meta">
 				  <small class="status-badge" [class.is-draft]="!lesson.isPublished">{{ lesson.isPublished ? 'Published' : 'Draft' }}</small>
-          <small class="meta-chip">{{ lesson.category }}</small>
-          <small class="meta-chip">{{ difficultyLabel(lesson.difficulty) }}</small>
+          <!-- <small class="meta-chip">{{ lesson.category }}</small>
+          <small class="meta-chip">{{ difficultyLabel(lesson.difficulty) }}</small> -->
 				  <small>{{ lesson.vocabulary.length }} vocab · {{ lesson.tests.length }} questions</small>
 				</div>
               </div>

@@ -159,6 +159,7 @@
                       <th>Meaning</th>
                       <th>Example</th>
                       <th>Note</th>
+                      <th>Audio</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -176,6 +177,16 @@
                         <td>{{ item.meaning }}</td>
                         <td>{{ item.exampleSentence }}</td>
                         <td>{{ item.note }}</td>
+                        <td>
+                          @if (hasAudio(item)) {
+                            <span class="audio-availability">
+                              <app-icon name="volume_up" size="sm" [decorative]="true"></app-icon>
+                              <span>Ready</span>
+                            </span>
+                          } @else {
+                            <span class="audio-missing">No audio</span>
+                          }
+                        </td>
                       </tr>
                     }
                   </tbody>
@@ -288,6 +299,23 @@
 
                 <p class="vocab-meta-label ui-meta-label">Note</p>
                 <p class="vocab-meta-value ui-meta-value">{{ vocabulary.note || 'No note yet.' }}</p>
+
+                <p class="vocab-meta-label ui-meta-label">Audio</p>
+                @if (hasAudio(vocabulary)) {
+                  <div class="audio-player-card ui-card ui-card-soft">
+                    <div class="audio-player-header">
+                      <span class="icon-with-label">
+                        <app-icon name="volume_up" size="sm" [decorative]="true"></app-icon>
+                        <span>Listen to pronunciation</span>
+                      </span>
+                    </div>
+                    <audio class="vocab-audio-player" controls preload="none" [src]="vocabulary.audioUrl">
+                      Your browser does not support audio playback.
+                    </audio>
+                  </div>
+                } @else {
+                  <p class="vocab-meta-value ui-meta-value">No audio yet.</p>
+                }
               </div>
             </div>
 

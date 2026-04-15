@@ -191,6 +191,10 @@ export class LearnerHomeComponent {
     }
   }
 
+  hasAudio(item: VocabularyItem): boolean {
+    return item.audioUrl.trim().length > 0;
+  }
+
   openVocabularyDetails(index: number): void {
     this.selectedVocabularyIndex.set(index);
   }

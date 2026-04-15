@@ -4,6 +4,7 @@ export interface VocabularyItem {
   meaning: string;
   exampleSentence: string;
   note: string;
+  audioUrl: string;
 }
 
 export const LESSON_DIFFICULTIES = ['beginner', 'elementary', 'intermediate'] as const;
