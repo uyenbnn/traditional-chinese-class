@@ -104,25 +104,25 @@ ul {
 .lesson-button {
   width: 100%;
   text-align: left;
-  border: 1px solid rgba(128, 155, 184, 0.86);
+	border: 1px solid rgba(143, 171, 212, 0.32);
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.9);
+	background: var(--surface-elevated);
   color: var(--ink-base);
   padding: 0.9rem 0.95rem;
   font-weight: 600;
   cursor: pointer;
   display: grid;
   gap: 0.3rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+	box-shadow: none;
 }
 
 .lesson-button.active {
-  background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+	background: linear-gradient(135deg, var(--accent-deep), var(--accent), var(--accent-deep));
   border-color: color-mix(in srgb, var(--accent-deep) 80%, #fff);
   color: var(--on-accent);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 12px 24px rgba(66, 108, 149, 0.22);
+		0 14px 28px rgba(74, 112, 169, 0.24);
 }
 
 .lesson-button.active .lesson-button-kicker,
@@ -131,12 +131,12 @@ ul {
 }
 
 .lesson-button.active .lesson-pill-category {
-  background: rgba(244, 249, 255, 0.18);
+  background: rgba(255, 255, 255, 0.14);
   color: var(--on-accent);
 }
 
 .lesson-button.active .lesson-pill-difficulty {
-  background: rgba(198, 242, 213, 0.22);
+  background: rgba(158, 201, 199, 0.22);
   color: rgba(244, 249, 255, 0.9);
 }
 
@@ -173,13 +173,13 @@ ul {
 
 .lesson-pill-category,
 .hero-pill:first-child {
-  background: rgba(83, 120, 155, 0.12);
+  background: rgba(143, 171, 212, 0.16);
   color: var(--accent-deep);
 }
 
 .lesson-pill-difficulty,
 .hero-pill:last-child {
-  background: rgba(84, 118, 92, 0.12);
+  background: rgba(143, 171, 212, 0.22);
   color: var(--success);
 }
 
@@ -223,15 +223,15 @@ h2 {
 .tab-button {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(128, 155, 184, 0.9);
+	border: 1px solid rgba(143, 171, 212, 0.34);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
+	background: var(--surface-elevated);
   color: var(--ink-base);
   padding: 0.58rem 0.95rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
+	box-shadow: none;
 }
 
 .tab-button:focus-visible {
@@ -240,7 +240,7 @@ h2 {
 }
 
 .tab-button.active {
-  background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+	background: linear-gradient(135deg, var(--accent-deep), var(--accent), var(--accent-deep));
   border-color: color-mix(in srgb, var(--accent-deep) 80%, #fff);
   color: var(--on-accent);
 }
@@ -271,7 +271,7 @@ h3 {
 
 table {
   min-width: 45rem;
-  background: rgba(255, 255, 255, 0.72);
+	background: var(--surface-strong);
   border-radius: var(--radius-md);
   overflow: hidden;
 }
@@ -328,7 +328,7 @@ table {
 .vocab-word-panel {
   display: grid;
   place-items: center;
-	background: linear-gradient(145deg, #e7f0f8, #d6e3f0);
+	background: var(--surface-elevated);
   padding: 1.3rem;
 }
 
@@ -380,7 +380,7 @@ table {
 .skeleton-item {
   height: 2.6rem;
   border-radius: var(--radius-sm);
-	background: linear-gradient(90deg, rgba(220, 231, 242, 0.8) 25%, rgba(255, 255, 255, 0.75) 50%, rgba(220, 231, 242, 0.8) 75%);
+	background: rgba(143, 171, 212, 0.18);
   animation: skeleton-pulse 1.4s ease-in-out infinite;
 }
 
@@ -418,5 +418,36 @@ table {
 
   .vocab-word {
     font-size: clamp(2.4rem, 12vw, 4rem);
+  }
+}
+
+:host-context([data-theme='dark']) {
+  table {
+    background: rgba(15, 24, 34, 0.88);
+  }
+
+  .lesson-button,
+  .tab-button {
+    background: linear-gradient(180deg, rgba(20, 31, 43, 0.94), rgba(12, 21, 31, 0.88));
+    border-color: rgba(107, 153, 159, 0.28);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .lesson-pill-category,
+  .hero-pill:first-child {
+    background: rgba(88, 174, 182, 0.14);
+  }
+
+  .lesson-pill-difficulty,
+  .hero-pill:last-child {
+    background: rgba(141, 197, 167, 0.18);
+  }
+
+  .vocab-word-panel {
+    background: linear-gradient(145deg, rgba(23, 35, 48, 0.98), rgba(12, 20, 29, 0.92));
+  }
+
+  .skeleton-item {
+    background: linear-gradient(90deg, rgba(29, 42, 56, 0.82) 25%, rgba(55, 74, 92, 0.72) 50%, rgba(29, 42, 56, 0.82) 75%);
   }
 }

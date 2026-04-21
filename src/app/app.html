@@ -1,53 +1,84 @@
 <div class="app-shell">
   <header class="topbar">
-    <div class="brand-block">
-      <p class="seal">漢學</p>
-      <div>
-        <p class="brand-title">Traditional Chinese Study</p>
-        <p class="brand-subtitle">Vocabulary, grammar, dialogue, and quick tests</p>
+    <div class="topbar-row">
+      <div class="brand-block">
+        <!-- <p class="seal">漢學</p> -->
+        <div class="brand-copy">
+          <p class="brand-overline">Lesson studio</p>
+          <p class="brand-title">漢學 Traditional Chinese Study</p>
+          <p class="brand-subtitle">Vocabulary, grammar, dialogue, and quick tests</p>
+        </div>
       </div>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-controls="primary-navigation"
+        [attr.aria-label]="menuToggleLabel()"
+        [attr.aria-expanded]="isMenuOpen()"
+        (click)="toggleMenu()"
+      >
+        <span class="icon-with-label">
+          <app-icon [name]="menuToggleIcon()" size="sm" [decorative]="true"></app-icon>
+          <span>Menu</span>
+        </span>
+      </button>
     </div>
 
-    <nav class="main-nav" aria-label="Primary">
-      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+    <nav id="primary-navigation" class="main-nav" aria-label="Primary" [class.is-open]="isMenuOpen()">
+      <div class="main-nav-links">
+      <a class="nav-link" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
         <span class="icon-with-label">
           <app-icon name="home" size="sm" [decorative]="true"></app-icon>
           <span>Home</span>
         </span>
       </a>
-      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/learn" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="nav-link" routerLink="/learn" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
         <span class="icon-with-label">
           <app-icon name="school" size="sm" [decorative]="true"></app-icon>
           <span>Learn</span>
         </span>
       </a>
-      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/learn/pinyin" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="nav-link" routerLink="/learn/pinyin" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
         <span class="icon-with-label">
           <app-icon name="record_voice_over" size="sm" [decorative]="true"></app-icon>
           <span>Pinyin</span>
         </span>
       </a>
-      <a class="interactive-soft-hover interactive-active-contrast" routerLink="/admin" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">
+      <button
+        class="nav-link nav-link-secondary theme-toggle"
+        type="button"
+        [attr.aria-label]="themeService.toggleLabel()"
+        [attr.aria-pressed]="themeService.isDark()"
+        (click)="closeMenu(); themeService.toggleTheme()"
+      >
+        <span class="icon-with-label">
+          <app-icon [name]="themeService.toggleIcon()" size="sm" [decorative]="true"></app-icon>
+          <span>{{ themeService.toggleText() }}</span>
+        </span>
+      </button>
+      <a class="nav-link" routerLink="/admin" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }" (click)="closeMenu()">
         <span class="icon-with-label">
           <app-icon name="admin_panel_settings" size="sm" [decorative]="true"></app-icon>
           <span>Admin</span>
         </span>
       </a>
       @if (!authService.isAuthenticated()) {
-        <a class="interactive-soft-hover interactive-active-contrast" routerLink="/auth/login" routerLinkActive="active-link">
+        <a class="nav-link nav-link-secondary" routerLink="/auth/login" routerLinkActive="active-link" (click)="closeMenu()">
           <span class="icon-with-label">
             <app-icon name="login" size="sm" [decorative]="true"></app-icon>
             <span>Sign In</span>
           </span>
         </a>
       } @else {
-        <button class="interactive-soft-hover" type="button" (click)="logout()">
+        <button class="nav-link nav-link-secondary" type="button" (click)="logout()">
           <span class="icon-with-label">
             <app-icon name="logout" size="sm" [decorative]="true"></app-icon>
             <span>Sign Out</span>
           </span>
         </button>
       }
+      </div>
     </nav>
   </header>
 
@@ -82,6 +113,18 @@
             <span>Pinyin Guide</span>
           </span>
         </a>
+        <button
+          class="interactive-soft-hover theme-toggle"
+          type="button"
+          [attr.aria-label]="themeService.toggleLabel()"
+          [attr.aria-pressed]="themeService.isDark()"
+          (click)="themeService.toggleTheme()"
+        >
+          <span class="icon-with-label">
+            <app-icon [name]="themeService.toggleIcon()" size="sm" [decorative]="true"></app-icon>
+            <span>{{ themeService.toggleText() }}</span>
+          </span>
+        </button>
         <a class="interactive-soft-hover" routerLink="/admin">
           <span class="icon-with-label">
             <app-icon name="dashboard" size="sm" [decorative]="true"></app-icon>

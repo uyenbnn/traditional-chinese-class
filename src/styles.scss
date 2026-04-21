@@ -1,23 +1,37 @@
 :root {
-	--bg-warm: #eef4fa;
-	--bg-warm-deep: #dce7f2;
-	--surface-elevated: rgba(251, 253, 255, 0.92);
-	--surface-strong: rgba(245, 249, 255, 0.98);
-	--surface-muted: rgba(232, 240, 248, 0.82);
-	--line-soft: #bccddd;
-	--line-strong: #809bb8;
-	--hover-soft: rgba(224, 236, 248, 0.9);
-	--ink-base: #142536;
-	--ink-muted: #456177;
-	--ink-soft: #6d879f;
-	--accent: #426c95;
-	--accent-deep: #244868;
-	--accent-soft: #dbe8f4;
-	--accent-strong: #638bb2;
-	--on-accent: #f4f9ff;
-	--success: #3b7f79;
+	color-scheme: light;
+	--bg-warm: #efece3;
+	--bg-warm-deep: #e5e0d4;
+	--surface-elevated: #f5f1e9;
+	--surface-strong: #faf7f1;
+	--surface-muted: rgba(143, 171, 212, 0.12);
+	--surface-tint: rgba(143, 171, 212, 0.16);
+	--surface-accent: rgba(74, 112, 169, 0.12);
+	--line-soft: #d3d9df;
+	--line-faint: rgba(39, 56, 74, 0.14);
+	--line-strong: #8fabd4;
+	--border-default: rgba(143, 171, 212, 0.34);
+	--border-strong: rgba(74, 112, 169, 0.26);
+	--hover-soft: #e9e4da;
+	--ink-base: #000000;
+	--ink-muted: #27384a;
+	--ink-subtle: rgba(39, 56, 74, 0.72);
+	--ink-soft: #4a70a9;
+	--accent: #8fabd4;
+	--accent-deep: #4a70a9;
+	--accent-soft: rgba(143, 171, 212, 0.24);
+	--accent-strong: #4a70a9;
+	--accent-dark: #385079be;
+	--highlight: #f7f4ed;
+	--highlight-soft: rgba(247, 244, 237, 0.9);
+	--cloud-overlay: rgba(255, 255, 255, 0.42);
+	--mist-overlay: rgba(239, 236, 227, 0.82);
+	--teal-overlay: rgba(143, 171, 212, 0.14);
+	--panel-end: #f1ede5;
+	--on-accent: #f8fcfd;
+	--success: #4a70a9;
 	--danger: #b33629;
-	--muted-button: #e6edf5;
+	--muted-button: #e7e2d8;
 	--radius-xl: 1.75rem;
 	--radius-lg: 1.25rem;
 	--radius-md: 0.95rem;
@@ -34,10 +48,51 @@
 	--text-lg: 1.2rem;
 	--text-xl: 1.7rem;
 	--text-2xl: 2.15rem;
-	--ring: 0 0 0 4px rgba(66, 108, 149, 0.2);
-	--shadow-soft: 0 20px 45px rgba(24, 49, 76, 0.11);
-	--shadow-crisp: 0 10px 24px rgba(25, 42, 61, 0.1);
-	--shadow-float: 0 30px 70px rgba(21, 37, 54, 0.12);
+	--ring: 0 0 0 4px rgba(143, 171, 212, 0.28);
+	--shadow-soft: 0 20px 45px rgba(0, 0, 0, 0.08);
+	--shadow-crisp: 0 12px 26px rgba(0, 0, 0, 0.12);
+	--shadow-float: 0 30px 70px rgba(0, 0, 0, 0.12);
+	--shadow-accent: 0 18px 36px rgba(74, 112, 169, 0.22);
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+	--bg-warm: #0f1720;
+	--bg-warm-deep: #091018;
+	--surface-elevated: rgba(18, 28, 39, 0.9);
+	--surface-strong: rgba(21, 32, 44, 0.96);
+	--surface-muted: rgba(48, 69, 84, 0.72);
+	--surface-tint: rgba(63, 151, 160, 0.14);
+	--surface-accent: rgba(100, 197, 204, 0.18);
+	--line-soft: #223443;
+	--line-faint: rgba(173, 192, 201, 0.18);
+	--line-strong: #3c7078;
+	--border-default: rgba(107, 153, 159, 0.32);
+	--border-strong: rgba(100, 197, 204, 0.28);
+	--hover-soft: rgba(34, 50, 65, 0.92);
+	--ink-base: #e8f1f5;
+	--ink-muted: #adc0c9;
+	--ink-subtle: rgba(173, 192, 201, 0.78);
+	--ink-soft: #86c8cd;
+	--accent: #58aeb6;
+	--accent-deep: #61d2e3;
+	--accent-soft: #79b7b9;
+	--accent-strong: #78cfd5;
+	--highlight: #15202b;
+	--highlight-soft: rgba(25, 37, 49, 0.86);
+	--cloud-overlay: rgba(11, 18, 25, 0.72);
+	--mist-overlay: rgba(31, 45, 58, 0.72);
+	--teal-overlay: rgba(88, 174, 182, 0.14);
+	--panel-end: rgba(15, 25, 36, 0.94);
+	--on-accent: #f4fbfc;
+	--success: #8dc5a7;
+	--danger: #ee7b6e;
+	--muted-button: #1d2a37;
+	--ring: 0 0 0 4px rgba(120, 207, 213, 0.24);
+	--shadow-soft: 0 22px 48px rgba(2, 8, 14, 0.42);
+	--shadow-crisp: 0 14px 28px rgba(2, 8, 14, 0.36);
+	--shadow-float: 0 34px 72px rgba(2, 8, 14, 0.5);
+	--shadow-accent: 0 18px 38px rgba(34, 112, 122, 0.32);
 }
 
 * {
@@ -55,10 +110,7 @@ body {
 	font-family: "Aptos", "Segoe UI", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
 	font-size: var(--text-base);
 	line-height: 1.55;
-	background:
-		radial-gradient(circle at top left, rgba(127, 161, 193, 0.18), transparent 34%),
-		radial-gradient(circle at right 18%, rgba(255, 255, 255, 0.82), transparent 24%),
-		linear-gradient(180deg, #fafdff 0%, var(--bg-warm) 42%, var(--bg-warm-deep) 100%);
+	background: var(--bg-warm);
 	background-attachment: fixed;
 }
 
@@ -112,7 +164,7 @@ a:active {
 }
 
 ::selection {
-	background: rgba(83, 120, 155, 0.2);
+	background: rgba(143, 171, 212, 0.36);
 }
 
 :focus-visible {
@@ -168,8 +220,8 @@ a:active {
 
 /* Shared UI templates (additive and reusable) */
 .ui-panel {
-	background: linear-gradient(180deg, var(--surface-strong), rgba(233, 241, 249, 0.94));
-	border: 1px solid rgba(188, 205, 221, 0.94);
+	background: var(--surface-strong);
+	border: 1px solid color-mix(in srgb, var(--line-soft) 92%, #fff);
 	border-radius: var(--radius-xl);
 	padding: 1.4rem;
 	box-shadow: var(--shadow-soft);
@@ -182,8 +234,8 @@ a:active {
 	margin-bottom: 0.7rem;
 	padding: 0.38rem 0.72rem;
 	border-radius: 999px;
-	border: 1px solid rgba(188, 205, 221, 0.92);
-	background: rgba(255, 255, 255, 0.88);
+	border: 1px solid var(--border-default);
+	background: var(--highlight);
 	color: var(--accent-deep);
 	font-size: var(--text-xs);
 	font-weight: 700;
@@ -209,13 +261,13 @@ a:active {
 
 .ui-form-control {
 	width: 100%;
-	border: 1px solid rgba(128, 155, 184, 0.92);
+	border: 1px solid var(--border-default);
 	border-radius: var(--radius-sm);
 	padding: 0.78rem 0.82rem;
 	font: inherit;
 	color: var(--ink-base);
-	background: rgba(255, 255, 255, 0.9);
-	box-shadow: inset 0 1px 2px rgba(45, 64, 86, 0.05);
+	background: var(--surface-strong);
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .ui-form-control:focus-visible {
@@ -231,9 +283,9 @@ a:active {
 }
 
 .ui-table-chrome {
-	border: 1px solid rgba(188, 205, 221, 0.94);
+	border: 1px solid var(--border-default);
 	border-radius: var(--radius-sm);
-	background: rgba(255, 255, 255, 0.78);
+	background: var(--surface-strong);
 }
 
 .ui-table-base {
@@ -243,7 +295,7 @@ a:active {
 
 .ui-table-base th,
 .ui-table-base td {
-	border-bottom: 1px solid rgba(204, 217, 231, 0.7);
+	border-bottom: 1px solid rgba(215, 226, 232, 0.9);
 	padding: 0.55rem;
 	text-align: left;
 	vertical-align: top;
@@ -254,7 +306,7 @@ a:active {
 	letter-spacing: 0.03em;
 	text-transform: uppercase;
 	color: var(--ink-soft);
-	background: rgba(219, 232, 244, 0.86);
+	background: var(--surface-elevated);
 }
 
 .ui-table-base tbody tr:last-child td {
@@ -270,7 +322,7 @@ a:active {
 }
 
 .ui-table-readable thead th {
-	background: rgba(219, 232, 244, 0.7);
+	background: var(--surface-elevated);
 	font-weight: 700;
 	text-transform: none;
 	letter-spacing: normal;
@@ -279,9 +331,9 @@ a:active {
 }
 
 .ui-card {
-	border: 1px solid rgba(188, 205, 221, 0.92);
+	border: 1px solid var(--border-default);
 	border-radius: var(--radius-md);
-	background: rgba(255, 255, 255, 0.8);
+	background: var(--surface-elevated);
 }
 
 .ui-card-block {
@@ -290,31 +342,31 @@ a:active {
 }
 
 .ui-card-soft {
-	border-color: rgba(188, 205, 221, 0.9);
-	background: rgba(255, 255, 255, 0.76);
+	border-color: rgba(143, 171, 212, 0.26);
+	background: var(--surface-strong);
 }
 
 .ui-option-btn {
-	border: 1px solid rgba(128, 155, 184, 0.88);
+	border: 1px solid var(--border-default);
 	border-radius: var(--radius-sm);
-	background: rgba(255, 255, 255, 0.88);
+	background: var(--surface-strong);
 	padding: 0.62rem 0.82rem;
 	cursor: pointer;
 }
 
 .ui-option-btn.selected {
-	background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+	background: linear-gradient(135deg, var(--accent-deep), var(--accent), var(--accent-strong));
 	border-color: color-mix(in srgb, var(--accent-deep) 80%, #fff);
 	color: var(--on-accent);
 	box-shadow:
 		inset 0 1px 0 rgba(255, 255, 255, 0.12),
-		0 10px 20px rgba(66, 108, 149, 0.2);
+		var(--shadow-accent);
 }
 
 .ui-modal-backdrop {
 	position: fixed;
 	inset: 0;
-	background: rgba(24, 39, 58, 0.42);
+	background: rgba(47, 72, 88, 0.42);
 	display: grid;
 	place-items: center;
 	padding: 1rem;
@@ -325,9 +377,9 @@ a:active {
 	width: min(56rem, 100%);
 	max-height: calc(100dvh - 2rem);
 	border-radius: var(--radius-xl);
-	border: 1px solid rgba(204, 217, 231, 0.95);
-	background: linear-gradient(180deg, rgba(251, 253, 255, 0.98), rgba(234, 242, 249, 0.98));
-	box-shadow: 0 22px 44px rgba(31, 45, 61, 0.18);
+	border: 1px solid rgba(143, 171, 212, 0.24);
+	background: var(--surface-strong);
+	box-shadow: 0 22px 44px rgba(0, 0, 0, 0.16);
 	overflow: auto;
 }
 
@@ -357,7 +409,7 @@ a:active {
 }
 
 .ui-footer-strip {
-	border-top: 1px solid rgba(204, 217, 231, 0.9);
+	border-top: 1px solid rgba(211, 217, 223, 0.88);
 	padding: 0.95rem 1rem;
 	display: flex;
 	align-items: center;
@@ -381,23 +433,28 @@ a:active {
 	border-radius: var(--radius-sm);
 	font-weight: 700;
 	cursor: pointer;
+	transition:
+		transform 180ms ease,
+		box-shadow 180ms ease,
+		background 180ms ease,
+		color 180ms ease;
 }
 
 .ui-btn-primary {
 	padding: 0.65rem 1rem;
-	background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+	background: linear-gradient(135deg, var(--accent-deep), var(--accent), var(--accent-deep));
 	color: #fff;
-	box-shadow: 0 10px 18px rgba(36, 72, 104, 0.24);
+	box-shadow: var(--shadow-accent);
 }
 
 .ui-btn-primary:hover {
-	box-shadow: 0 14px 24px rgba(36, 72, 104, 0.28);
+	box-shadow: 0 22px 34px rgba(74, 112, 169, 0.28);
 }
 
 .ui-btn-secondary {
-	background: linear-gradient(180deg, #f4f8fc, #dfe9f4);
+	background: var(--surface-elevated);
 	color: var(--ink-base);
-	box-shadow: none;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .ui-btn-danger {
@@ -408,7 +465,7 @@ a:active {
 
 .ui-scrollbar-thin {
 	scrollbar-width: thin;
-	scrollbar-color: rgba(82, 122, 159, 0.72) rgba(222, 233, 244, 0.75);
+	scrollbar-color: rgba(74, 112, 169, 0.64) rgba(239, 236, 227, 0.92);
 }
 
 .ui-scrollbar-thin::-webkit-scrollbar {
@@ -417,24 +474,24 @@ a:active {
 }
 
 .ui-scrollbar-thin::-webkit-scrollbar-track {
-	background: rgba(222, 233, 244, 0.75);
+	background: rgba(239, 236, 227, 0.92);
 	border-radius: 999px;
 }
 
 .ui-scrollbar-thin::-webkit-scrollbar-thumb {
-	background: linear-gradient(180deg, rgba(107, 149, 187, 0.95), rgba(74, 118, 158, 0.95));
+	background: rgba(74, 112, 169, 0.72);
 	border-radius: 999px;
 }
 
 .ui-scrollbar-thin::-webkit-scrollbar-thumb:hover {
-	background: linear-gradient(180deg, rgba(93, 137, 176, 1), rgba(62, 104, 143, 1));
+	background: rgba(74, 112, 169, 0.88);
 }
 
 .interactive-soft-hover:hover {
 	border-color: color-mix(in srgb, var(--accent) 58%, #fff);
-	background: linear-gradient(135deg, var(--hover-soft), rgba(248, 252, 255, 0.98));
+	background: var(--hover-soft);
 	color: var(--ink-base);
-	box-shadow: 0 10px 20px rgba(66, 108, 149, 0.12);
+	box-shadow: 0 12px 22px rgba(0, 0, 0, 0.08);
 }
 
 .interactive-soft-hover:hover .interactive-subtle {
@@ -449,12 +506,12 @@ a:active {
 .interactive-active-contrast.active-link,
 .interactive-active-contrast.selected,
 .interactive-active-contrast[aria-selected='true'] {
-	background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+	background: linear-gradient(135deg, var(--accent-deep), var(--accent), var(--accent-deep));
 	border-color: color-mix(in srgb, var(--accent-deep) 80%, #fff);
 	color: var(--on-accent);
 	box-shadow:
 		inset 0 1px 0 rgba(255, 255, 255, 0.12),
-		0 12px 24px rgba(66, 108, 149, 0.22);
+		0 14px 28px rgba(74, 112, 169, 0.24);
 }
 
 .interactive-active-contrast.active .interactive-subtle,
@@ -472,7 +529,7 @@ a:active {
 }
 
 .interactive-row-soft:hover {
-	background: linear-gradient(135deg, var(--hover-soft), rgba(248, 252, 255, 0.98));
+	background: var(--hover-soft);
 	color: var(--ink-base);
 }
 
@@ -482,8 +539,8 @@ a:active {
 
 .interactive-surface-soft:hover {
 	border-color: color-mix(in srgb, var(--accent) 58%, #fff);
-	background: linear-gradient(135deg, var(--hover-soft), rgba(248, 252, 255, 0.98));
-	box-shadow: 0 12px 24px rgba(66, 108, 149, 0.12);
+	background: var(--hover-soft);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .interactive-surface-soft:hover h3,
@@ -520,6 +577,104 @@ a:active {
 	border-radius: 50%;
 	animation: spin 500ms linear infinite;
 	vertical-align: middle;
+}
+
+
+:root[data-theme='dark'] {
+	body {
+		background:
+			radial-gradient(circle at top left, rgba(120, 207, 213, 0.12), transparent 28%),
+			radial-gradient(circle at 82% 16%, rgba(38, 88, 98, 0.2), transparent 24%),
+			radial-gradient(circle at 50% 100%, rgba(12, 20, 30, 0.78), transparent 30%),
+			linear-gradient(180deg, #111a23 0%, var(--bg-warm) 36%, var(--bg-warm-deep) 100%);
+	}
+
+	::selection {
+		background: rgba(120, 207, 213, 0.28);
+	}
+
+	.ui-panel {
+		background: linear-gradient(180deg, var(--surface-strong), var(--panel-end));
+		border-color: color-mix(in srgb, var(--line-soft) 92%, #000);
+	}
+
+	.ui-eyebrow {
+		background: linear-gradient(180deg, rgba(24, 37, 49, 0.94), rgba(12, 20, 30, 0.82));
+	}
+
+	.ui-form-control {
+		background: rgba(11, 19, 27, 0.94);
+		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.32);
+	}
+
+	.ui-table-chrome {
+		background: rgba(14, 22, 31, 0.88);
+	}
+
+	.ui-table-base th,
+	.ui-table-base td,
+	.ui-table-readable th,
+	.ui-table-readable td,
+	.ui-footer-strip {
+		border-color: rgba(34, 52, 67, 0.92);
+	}
+
+	.ui-table-base thead th,
+	.ui-table-readable thead th {
+		background: linear-gradient(180deg, rgba(28, 41, 54, 0.96), rgba(18, 29, 40, 0.88));
+	}
+
+	.ui-card {
+		background: linear-gradient(180deg, rgba(20, 31, 43, 0.9), rgba(12, 21, 31, 0.84));
+	}
+
+	.ui-card-soft,
+	.ui-option-btn {
+		background: rgba(15, 24, 35, 0.88);
+		border-color: rgba(107, 153, 159, 0.26);
+	}
+
+	.ui-modal-backdrop {
+		background: rgba(3, 8, 14, 0.64);
+	}
+
+	.ui-modal-shell {
+		background: linear-gradient(180deg, rgba(17, 27, 38, 0.98), rgba(10, 18, 27, 0.98));
+		border-color: rgba(107, 153, 159, 0.24);
+		box-shadow: 0 24px 54px rgba(2, 8, 14, 0.5);
+	}
+
+	.ui-btn-secondary {
+		background: linear-gradient(180deg, rgba(25, 37, 49, 0.96), rgba(15, 24, 34, 0.92));
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+	}
+
+	.ui-scrollbar-thin {
+		scrollbar-color: rgba(88, 174, 182, 0.7) rgba(16, 25, 35, 0.94);
+	}
+
+	.ui-scrollbar-thin::-webkit-scrollbar-track {
+		background: rgba(16, 25, 35, 0.94);
+	}
+
+	.ui-scrollbar-thin::-webkit-scrollbar-thumb {
+		background: linear-gradient(180deg, rgba(88, 174, 182, 0.9), rgba(40, 90, 98, 0.92));
+	}
+
+	.ui-scrollbar-thin::-webkit-scrollbar-thumb:hover {
+		background: linear-gradient(180deg, rgba(120, 207, 213, 1), rgba(53, 118, 128, 1));
+	}
+
+	.interactive-soft-hover:hover,
+	.interactive-row-soft:hover,
+	.interactive-surface-soft:hover {
+		background: linear-gradient(135deg, rgba(28, 41, 54, 0.96), rgba(15, 24, 35, 0.94));
+	}
+
+	.interactive-soft-hover:hover,
+	.interactive-surface-soft:hover {
+		box-shadow: 0 12px 24px rgba(4, 12, 20, 0.42);
+	}
 }
 
 /* ── Accessibility: respect motion preference ─────────────── */

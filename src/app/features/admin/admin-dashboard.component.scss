@@ -13,12 +13,12 @@
   right: 1rem;
   top: calc(env(safe-area-inset-top) + 6.75rem);
   z-index: 2000;
-  background: linear-gradient(135deg, var(--success), #7aa182);
+	background: linear-gradient(135deg, var(--accent-deep), var(--accent), var(--accent-deep));
   color: #fff;
   border-radius: var(--radius-sm);
   padding: 0.8rem 1rem;
   font-weight: 700;
-  box-shadow: 0 14px 28px rgba(44, 84, 53, 0.22);
+	box-shadow: 0 16px 30px rgba(74, 112, 169, 0.26);
   animation: toast-in 180ms ease-out;
 }
 
@@ -86,8 +86,8 @@ h2 {
   margin: 0.9rem 0;
   color: var(--accent-deep);
   font-weight: 700;
-  background: rgba(219, 232, 244, 0.85);
-  border: 1px solid rgba(83, 120, 155, 0.14);
+	background: var(--surface-elevated);
+	border: 1px solid rgba(143, 171, 212, 0.3);
   border-radius: 999px;
   padding: 0.55rem 0.85rem;
   display: inline-flex;
@@ -103,8 +103,8 @@ textarea {
   margin-top: 0.45rem;
 	padding: 1rem;
 	border-radius: var(--radius-lg);
-  border: 1px solid rgba(188, 205, 221, 0.86);
-  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(143, 171, 212, 0.24);
+  background: var(--surface-elevated);
 }
 
 .section-header {
@@ -134,10 +134,10 @@ textarea {
   align-items: center;
   font-weight: 500;
   width: fit-content;
-  border: 1px solid rgba(128, 155, 184, 0.9);
+	border: 1px solid rgba(143, 171, 212, 0.34);
   border-radius: var(--radius-sm);
   padding: 0.55rem 0.75rem;
-  background: rgba(255, 255, 255, 0.82);
+	background: var(--surface-strong);
   cursor: pointer;
 }
 
@@ -151,7 +151,7 @@ textarea {
   height: 1.1rem;
   margin: 0;
   padding: 0;
-  border: 1px solid rgba(83, 120, 155, 0.55);
+  border: 1px solid rgba(74, 112, 169, 0.5);
   border-radius: 0.3rem;
   background: #fff;
   box-shadow: none;
@@ -172,7 +172,7 @@ textarea {
 
 .checkbox input[type='checkbox']:checked {
   border-color: var(--accent-strong);
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  background: linear-gradient(135deg, var(--accent-deep), var(--accent), var(--accent-deep));
 }
 
 .checkbox input[type='checkbox']:checked::before {
@@ -234,13 +234,13 @@ small {
   align-items: center;
   padding: 0.26rem 0.56rem;
   border-radius: 999px;
-  background: rgba(84, 118, 92, 0.12);
+	background: rgba(143, 171, 212, 0.18);
   color: var(--success);
   font-weight: 700;
 }
 
 .status-badge.is-draft {
-  background: rgba(83, 120, 155, 0.12);
+	background: rgba(143, 171, 212, 0.12);
   color: var(--accent-deep);
 }
 
@@ -249,7 +249,7 @@ small {
   align-items: center;
   padding: 0.26rem 0.56rem;
   border-radius: 999px;
-  background: rgba(83, 120, 155, 0.08);
+	background: var(--surface-elevated);
   color: var(--ink-soft);
   font-weight: 700;
 }
@@ -275,5 +275,36 @@ small {
 
   .lesson-list li {
     flex-direction: column;
+  }
+}
+
+:host-context([data-theme='dark']) {
+  .status,
+  .editor-section,
+  .checkbox {
+    background: linear-gradient(180deg, rgba(20, 31, 43, 0.94), rgba(12, 21, 31, 0.88));
+  }
+
+  .status,
+  .editor-section,
+  .checkbox {
+    border-color: rgba(107, 153, 159, 0.26);
+  }
+
+  .checkbox input[type='checkbox'] {
+    background: rgba(10, 18, 27, 0.94);
+    border-color: rgba(88, 174, 182, 0.42);
+  }
+
+  .status-badge {
+    background: rgba(141, 197, 167, 0.18);
+  }
+
+  .status-badge.is-draft {
+    background: rgba(88, 174, 182, 0.14);
+  }
+
+  .meta-chip {
+    background: rgba(28, 41, 54, 0.92);
   }
 }
